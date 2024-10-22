@@ -6,8 +6,8 @@ Section: <code>CSIT340 - G2</code> <br> <br>
 
 👨‍💼<code>Baguio, John Kenneth</code><br>
 👨‍💼<code>Cultura, Jesson Chyd</code><br>
-👨‍💼<code>Dedumo, Emmanuel</code>
-👨‍💼<code>Destura, Harold</code>
+👨‍💼<code>Dedumo, Emmanuel</code> <br>
+👨‍💼<code>Destura, Harold</code> <br>
 👨‍💼<code>Vequiso, Ashley Josh</code>
 
 <br> <br>
