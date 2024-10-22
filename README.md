@@ -4,6 +4,7 @@ Canteen App provides a seamless way for both students and staff to order food fr
 Prof: <code>Sir. Eugene Busico</code> <br>
 Section: <code>CSIT340 - G2</code> <br> <br>
 
+Members: <br>
 👨‍💼<code>Baguio, John Kenneth</code><br>
 👨‍💼<code>Cultura, Jesson Chyd</code><br>
 👨‍💼<code>Dedumo, Emmanuel</code> <br>
