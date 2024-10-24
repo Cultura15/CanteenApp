@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import SunnySideupEgg from '../Foods/SunnySudeupEgg';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Canteen1 = () => {
+    const [activeMenu, setActiveMenu] = useState('breakfast'); // Track the active menu
+    const navigate = useNavigate(); 
+
     const Header = () => {
         return (
             <header className="header">
@@ -18,11 +23,11 @@ const Canteen1 = () => {
     const SubMenuNav = () => {
         return (
             <nav className="sub-menu-nav">
-                <a href="#breakfast" className="active">Breakfast</a>
-                <a href="#lunch">Lunch</a>
-                <a href="#snacks">Snacks</a>
-                <a href="#drinks">Drinks</a>
-                <a href="#dessert">Dessert</a>
+                <a href="#breakfast" className={activeMenu === 'breakfast' ? 'active' : ''} onClick={() => setActiveMenu('breakfast')}>Breakfast</a>
+                <a href="#lunch" className={activeMenu === 'lunch' ? 'active' : ''} onClick={() => setActiveMenu('lunch')}>Lunch</a>
+                <a href="#snacks" className={activeMenu === 'snacks' ? 'active' : ''} onClick={() => setActiveMenu('snacks')}>Snacks</a>
+                <a href="#drinks" className={activeMenu === 'drinks' ? 'active' : ''} onClick={() => setActiveMenu('drinks')}>Drinks</a>
+                <a href="#dessert" className={activeMenu === 'dessert' ? 'active' : ''} onClick={() => setActiveMenu('dessert')}>Dessert</a>
             </nav>
         );
     };
@@ -32,7 +37,7 @@ const Canteen1 = () => {
             <div className="sidebar">
                 <h3>Viand</h3>
                 <ul>
-                    <li>Egg</li>
+                    <li onClick={() => handleItemClick({ name: 'Sunny Sideup Egg', imgSrc: 'sunny_side_up.png', component: SunnySideupEgg })}>Sunny Sideup Egg</li>
                     <li>Hotdog</li>
                     <li>Pancakes</li>
                     <li>Sandwich</li>
@@ -54,21 +59,21 @@ const Canteen1 = () => {
     };
 
     const MenuGrid = () => {
-        const items = [
-            { name: 'Sunny Sideup Egg', imgSrc: 'sunny_side_up.png' },
-            { name: 'Hotdog Bun', imgSrc: 'hotdog_bun.png' },
-            { name: 'Pancake', imgSrc: 'pancake.png' },
-            { name: 'Sandwich', imgSrc: 'sandwich.png' },
-            { name: 'Oatmeal', imgSrc: 'oatmeal.png' },
-            { name: 'Banana', imgSrc: 'banana.png' },
-        ];
+        const menuItems = {
+            breakfast: [
+                { name: 'Sunny Sideup Egg', imgSrc: 'sunny_side_up.png', component: SunnySideupEgg },
+            ],
+            // Other categories...
+        };
+
+        const items = menuItems[activeMenu];
 
         return (
             <div className="menu-grid">
-                <h2>Breakfast Menu</h2>
+                <h2>{activeMenu.charAt(0).toUpperCase() + activeMenu.slice(1)} Menu</h2>
                 <div className="menu-items">
                     {items.map((item, index) => (
-                        <div key={index} className="menu-item">
+                        <div key={index} className="menu-item" onClick={() => handleItemClick(item)}>
                             <img src={`/path/to/images/${item.imgSrc}`} alt={item.name} />
                             <span>{item.name}</span>
                         </div>
@@ -76,6 +81,11 @@ const Canteen1 = () => {
                 </div>
             </div>
         );
+    };
+
+    const handleItemClick = (item) => {
+        // Use navigate to go to the food item route
+        navigate('/food/sunny-side-up');
     };
 
     return (

@@ -1,5 +1,5 @@
-// Login.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './frontend.css';
 
@@ -8,6 +8,8 @@ const Login = ({ onSuccess }) => {
         email: '',
         password: ''
     });
+    
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const handleLoginChange = (event) => {
         const { id, value } = event.target;
@@ -18,17 +20,12 @@ const Login = ({ onSuccess }) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:8080/api/users/login', loginData);
-            console.log('Login Success:', response.data);
             alert('User logged in successfully!');
-            
-            // Store user ID in local storage
             localStorage.setItem('user_id', response.data.user_id); 
-
-            // Call the onSuccess prop to move to menu
+    
+            // Call the onSuccess prop to indicate a successful login
             onSuccess();
-
-            // Optionally, clear the login form
-            setLoginData({ email: '', password: '' });
+            navigate('/canteenSelection'); // Navigate to the canteen selection page on successful login
         } catch (error) {
             console.error('Login Error:', error);
             alert('Failed to log in.');

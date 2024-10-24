@@ -1,5 +1,6 @@
 // Register.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './frontend.css';
 
 const Register = ({ onSuccess, onSwitch }) => { // Accept onSwitch as a prop
@@ -9,6 +10,8 @@ const Register = ({ onSuccess, onSwitch }) => { // Accept onSwitch as a prop
         email: '',
         password: ''
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { id, value } = event.target;
@@ -25,23 +28,25 @@ const Register = ({ onSuccess, onSwitch }) => { // Accept onSwitch as a prop
                 },
                 body: JSON.stringify(formData),
             });
-
+    
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
+    
             const data = await response.json();
             console.log('Success:', data);
             alert('User registered successfully!');
             setFormData({ fname: '', lname: '', email: '', password: '' });
-
-            // Call the onSuccess prop to move to login
-            onSuccess();
+    
+            console.log('Calling onSuccess() to navigate to login');
+            onSuccess(); // Ensure this is called correctly
+            navigate('/login');
         } catch (error) {
             console.error('Error:', error);
             alert('Failed to register user.');
         }
     };
+    
 
     return (
         <div className="form-container">
@@ -92,7 +97,7 @@ const Register = ({ onSuccess, onSwitch }) => { // Accept onSwitch as a prop
                 </div>
             </form>
             <p>
-                Already have an account? <a href="#" onClick={onSwitch}>Log in</a>
+            Already have an account? <a href="#" onClick={() => navigate('/login')}>Log in</a>
             </p>
         </div>
     );
