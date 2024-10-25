@@ -1,13 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SunnySideupEgg = () => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1); // State to track quantity
+    const [menuItem, setMenuItem] = useState(null);
 
     const handleBack = () => {
         navigate(-1); // Go back to the previous route
     };
+
+    useEffect(() => {
+        const fetchMenuItem = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/api/menu/get'); // Adjust this if necessary
+                console.log('Response data:', response.data); // Log the entire response data
+                
+                const eggItem = response.data.find(item => item.name === "SunnySideUp Egg"); // Replace with your actual condition
+                
+                if (eggItem) {
+                    console.log('Sunny Sideup Egg item:', eggItem); // Log the found item
+                    setMenuItem(eggItem); // Set the fetched item
+                } else {
+                    console.warn('Sunny Sideup Egg not found in the fetched data.'); // Warn if not found
+                }
+            } catch (error) {
+                console.error('Error fetching menu items:', error);
+                alert("Item not found in the database."); // Alert if an error occurs
+            }
+        };
+
+        fetchMenuItem();
+    }, []);
+    
 
     // Handle quantity change
     const handleQuantityChange = (e) => {
@@ -30,8 +56,14 @@ const SunnySideupEgg = () => {
                 <div className="horizontal-line"></div> {/* Add this line */}
                 {/* Add text below the horizontal line */}
             <div className="food-path">
-                /Breakfast/Sunny Sideup
+                / Breakfast / Sunny Sideup            
             </div>
+            
+            <div className = "back-button-container">
+            <button className="back-button" onClick={handleBack}>
+                    Back to Menu
+                </button>
+                </div>
             </>
         );
     };
@@ -53,14 +85,20 @@ const SunnySideupEgg = () => {
 
             <div className="description">
                 <h3>Description</h3>
-                <p>Your detailed description of the Sunny Sideup Egg goes here...</p>
+                <div className="small-horizontal-line"></div> {/* New small horizontal line */}
+                <p>A sunny-side-up egg is a classic breakfast dish characterized by its bright, glossy yolk, which remains runny while 
+                    the egg white is cooked to a tender, slightly firm texture. 
+                    Typically containing about 97 calories, this delightful egg preparation provides a 
+                    good source of protein and essential nutrients.</p>       
             </div>
 
-            
+            <div className="quantity">
+                <h3>Quantity</h3>
+                <div className="small-horizontal-line"></div> {/* New small horizontal line */}
 
-            {/* Quantity Selector and Buttons */}
+                 {/* Quantity Selector and Buttons */}
             <div className="quantity-selector">
-                <label htmlFor="quantity">Quantity:</label>
+                {/* <label htmlFor="quantity">Quantity:</label> */}
                 <input
                     type="number"
                     id="quantity"
@@ -78,13 +116,30 @@ const SunnySideupEgg = () => {
                 <button className="reserve-item" onClick={() => alert(`Reserved ${quantity} Sunny Sideup Egg(s)`)}>
                     Reserve Item
                 </button>
-                <button className="back-button" onClick={handleBack}>
-                    Back to Menu
-                </button>
+               
+            </div>
+                   
             </div>
 
             {/* CSS styling */}
-            <style jsx>{`
+            <style>{`
+
+            .sunny-side-up-page {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100vh;
+                    background-color: #f4f4f4;
+                }
+
+               .content-wrapper {
+                    max-width: 800px;
+                    padding: 20px;
+                    background-color: white;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    overflow: hidden;
+                }
                 .header {
                     display: flex;
                     align-items: center; /* Vertically center the content */
@@ -142,6 +197,7 @@ const SunnySideupEgg = () => {
                     left: 0px;
                 }
 
+
                 .food-detail-container {
                     display: flex;
                     background-color: #70795e;
@@ -156,24 +212,51 @@ const SunnySideupEgg = () => {
                     z-index: 998; /* Ensure it stays below the food-path but above other content */
                 }
 
+                .quantity {
+                    position: fixed; /* Fix the position of the element */
+                    top: 400px; /* Position it below the food-detail-container */
+                    right: 20px; /* Align to the left with some padding */
+                    z-index: 997; /* Ensure it stays below the food detail container */
+                    color: black;
+                    padding: 10px; /* Padding for spacing */
+                    background-color: #f9f9f9; /* Background color */
+                    border-radius: 5px; /* Rounded corners */
+                    width: calc(50vw - 50px); /* Full width minus some padding */
+                    
+                }
+
                 .description {
                     position: fixed; /* Fix the position of the element */
-                    top: 400px; /* Adjust this value based on the height of your food-detail-container */
+                    top: 400px; /* Position it below the food-detail-container */
                     left: 20px; /* Align to the left with some padding */
                     z-index: 997; /* Ensure it stays below the food detail container */
                     color: #70795e; /* Color of the description text */
                     padding: 10px; /* Padding for spacing */
                     background-color: #f9f9f9; /* Background color */
                     border-radius: 5px; /* Rounded corners */
-                    width: calc(100vw - 40px); /* Full width minus some padding */
+                    width: calc(50vw - 50px); /* Full width minus some padding */
+                   
+
+                }
+
+                .small-horizontal-line {
+                    width: 80%; /* Adjust width as needed */
+                    height: 2px; /* Height of the line */
+                    background-color: #000000; /* Color of the line */
+                    position: relative; /* Change to relative positioning */
+                    margin-top: 10px; /* Space from the description */
+                    left: 40%; /* Center horizontally */
+                    transform: translateX(-50%); /* Center alignment */
                 }
 
                 .description h3 {
-                    margin: 0; /* Remove default margin */
+                    margin: 100; /* Remove default margin */
+                    color: black;
                 }
 
                 .description p {
-                    margin: 5px 0 0; /* Add margin to separate text */
+                    margin: 30px 0 0; /* Add margin to separate text */
+                    color: black;
                 }
 
 
@@ -205,7 +288,7 @@ const SunnySideupEgg = () => {
                     top: 110px; /* Adjust this value based on where you want it to appear (below the header) */
                     left: 70px; /* Adjust this value for horizontal positioning */
                     font-size: 18px; /* Font size for the path text */
-                    color: #70795e; /* Color of the path text */
+                    color: #524e4e; /* Color of the path text */
                     z-index: 999; /* Ensure it stays above other elements if necessary */
                 }
 
@@ -213,43 +296,74 @@ const SunnySideupEgg = () => {
 
                 .quantity-selector {
                     margin: 20px 0;
-                    text-align: center;
+                    text-align: left;
+                    left: 10px;
+                    width: 200px; /* Adjust the width as needed */
+                    font-size: 20px; /* Increase the font size */
+                    padding: 10px; /* Add padding for better spacing */
+                    
                 }
 
                 .quantity-selector input[type="number"] {
                     width: 50px;
                     text-align: center;
                     margin-left: 10px;
+                    font-size: 30px;
+                    border-radius: 10px;
                 }
 
                 .action-buttons {
                     display: flex;
-                    justify-content: center;
-                    gap: 10px;
-                    margin-top: 20px;
+                    justify-content: left;
+                    gap: 50px;
+                    margin-top: 60px;
                 }
 
-                .add-to-cart, .reserve-item, .back-button {
-                    padding: 10px 20px;
+                .add-to-cart, .reserve-item {
+                    padding: 20px 20px;
+                    width: 20%;
                     color: white;
                     border: none;
                     cursor: pointer;
+                    border-radius: 100px;
                 }
 
                 .add-to-cart {
-                    background-color: #4CAF50;
+                    background-color: #545454;
+                    color: white;
+                    border: 2px solid black;
+                   
                 }
 
                 .reserve-item {
-                    background-color: #f0ad4e;
+                    background-color: #545454;
+                    color: white;
+                    border: 2px solid black;
+                  
+                }
+
+                .back-button-container{
+                    position: fixed; /* Fixes the position of the element */
+                    top: 99px; /* Adjust this value based on where you want it to appear (below the header) */
+                    right: 70px; /* Adjust this value for horizontal positioning */
+                    font-size: 18px; /* Font size for the path text */
+                    color: #70795e; /* Color of the path text */
+                    z-index: 999; /* Ensure it stays above other elements if necessary */
+                    
                 }
 
                 .back-button {
-                    background-color: #d9534f;
+                    padding: 10px 20px;
+                    color: black;
+                    border: 2px solid black;
+                    border-radius: 100px;
+                    cursor: pointer;
+                    background-color: #8d1313;
                 }
 
                 button:hover {
-                    opacity: 0.8;
+                    background-color: #b5c496;
+                    opacity: 1;
                 }
             `}</style>
         </div>
