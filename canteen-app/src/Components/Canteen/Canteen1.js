@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SunnySideupEgg from '../Foods/SunnySudeupEgg';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import HotdugBun from '../Foods/HotdogBun';
+import GrilledChicken from '../Foods/GrilledChicken';
 
 const Canteen1 = () => {
     const [activeMenu, setActiveMenu] = useState('breakfast'); // Track the active menu
@@ -12,7 +14,7 @@ const Canteen1 = () => {
                 <div className="logo">LOGO</div>
                 <nav className="nav-links">
                     <a href="#menu">Menu</a>
-                    <a href="#cart">Cart</a>
+                    <a href="#cart">Cart</a>    
                     <a href="#account">Account</a>
                 </nav>
                 <div className="canteen">Canteen 1</div>
@@ -37,7 +39,7 @@ const Canteen1 = () => {
             <div className="sidebar">
                 <h3>Viand</h3>
                 <ul>
-                    <li onClick={() => handleItemClick({ name: 'Sunny Sideup Egg', imgSrc: 'sunny_side_up.png', component: SunnySideupEgg })}>Sunny Sideup Egg</li>
+                    <li>Egg</li>
                     <li>Hotdog</li>
                     <li>Pancakes</li>
                     <li>Sandwich</li>
@@ -62,11 +64,40 @@ const Canteen1 = () => {
         const menuItems = {
             breakfast: [
                 { name: 'Sunny Sideup Egg', imgSrc: 'sunny_side_up.png', component: SunnySideupEgg },
+                { name: 'Hotdog', imgSrc: 'asd.png', component: HotdugBun }, // Added Hotdog component
             ],
-            // Other categories...
+            lunch: [
+                { name: 'Grilled Chicken', imgSrc: 'asd.png', component: GrilledChicken },
+              
+            ],
+            // snacks: [
+            //     { name: 'Sandwich', imgSrc: 'sandwich.png', component: SnackItem },
+            //     { name: 'Fries', imgSrc: 'fries.png', component: () => <div>Fries</div> },
+            // ],
+            // drinks: [
+            //     { name: 'Hot Coffee', imgSrc: 'hot_coffee.png', component: DrinkItem },
+            //     { name: 'Milk Tea', imgSrc: 'milk_tea.png', component: () => <div>Milk Tea</div> },
+            // ],
+            // dessert: [
+            //     { name: 'Ice Cream', imgSrc: 'ice_cream.png', component: DessertItem },
+            //     { name: 'Chocolate Cake', imgSrc: 'chocolate_cake.png', component: () => <div>Chocolate Cake</div> },
+            // ],
         };
 
         const items = menuItems[activeMenu];
+
+        const handleItemClick = (item) => {
+            // Manually define navigation for each menu item
+            if (item.name === 'Sunny Sideup Egg') {
+                navigate('/canteen1/breakfast/sunny-side-up');
+            } else if (item.name === 'Hotdog') {
+                navigate('/canteen1/breakfast/hot-dog-bun');
+            } else if (item.name === 'Grilled Chicken'){
+                navigate('/canteen1/lunch/grilled-chicken');
+            }
+            // Add more conditions for other food items as needed
+        };
+        
 
         return (
             <div className="menu-grid">
@@ -74,18 +105,13 @@ const Canteen1 = () => {
                 <div className="menu-items">
                     {items.map((item, index) => (
                         <div key={index} className="menu-item" onClick={() => handleItemClick(item)}>
-                            <img src={`/path/to/images/${item.imgSrc}`} alt={item.name} />
+                            <img src={`/assets/${item.imgSrc}`} alt={item.name} />
                             <span>{item.name}</span>
                         </div>
                     ))}
                 </div>
             </div>
         );
-    };
-
-    const handleItemClick = (item) => {
-        // Use navigate to go to the food item route
-        navigate('/food/sunny-side-up');
     };
 
     return (
