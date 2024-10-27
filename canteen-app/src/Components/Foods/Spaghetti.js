@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const SunnySideupEgg = () => {
+const Spaghetti = () => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1); // State to track quantity
     const [menuItem, setMenuItem] = useState(null);
-    const userId = localStorage.getItem('user_id');
 
     const handleBack = () => {
         navigate(-1); // Go back to the previous route
@@ -34,78 +33,12 @@ const SunnySideupEgg = () => {
 
         fetchMenuItem();
     }, []);
+    
 
     // Handle quantity change
     const handleQuantityChange = (e) => {
         setQuantity(parseInt(e.target.value));
     };
-
-    // Function to add the item to the cart
-    const addToCart = async () => {
-        if (!menuItem) {
-            alert("Menu item not found.");
-            return;
-        }
-    
-        if (!userId) {
-            alert("User is not logged in.");
-            return;
-        }
-    
-        let cart;
-        try {
-            // Try to fetch the user's cart by userId
-            const cartResponse = await axios.get(`http://localhost:8080/api/cart/user/${userId}`);
-            cart = cartResponse.data;
-        } catch (error) {
-            console.warn('No existing cart found, creating a new one.');
-            const newCartData = {
-                totalAmount: 0.0,
-                user: { userId: userId }
-            };
-    
-            try {
-                // Create a new cart if none exists
-                const newCartResponse = await axios.post('http://localhost:8080/api/cart', newCartData);
-                cart = newCartResponse.data;
-
-                alert("Cart created successfully!");
-            } catch (error) {
-                console.error('Error creating new cart:', error);
-                alert("Failed to create cart.");
-                return;
-            }
-        }
-    
-        // Ensure the cart is valid
-        if (!cart || !cart.cartId) {
-            alert("Invalid cart. Please try again.");
-            return;
-        }
-    
-        // Structure the cart item data according to your DTO requirements
-        const cartItemData = {
-            cart: { cartId: cart.cartId },           // Reference to the cart
-            menuItem: { menuItemID: menuItem.menuItemID }, // Adjusted key to match your DTO
-            quantity: quantity, // This quantity is the amount you want to add
-            price: menuItem.price // You may also want to include the price if needed
-        };
-    
-        console.log('Sending cart item data:', cartItemData); // Debugging log
-    
-        try {
-            // Add item to cart
-            const itemResponse = await axios.post(`http://localhost:8080/api/cart-items/user/${userId}`, cartItemData);
-            console.log('Item added to cart:', itemResponse.data);
-            alert(`Added ${quantity} ${menuItem.name}(s) to cart!`);
-        } catch (error) {
-            console.error('Error adding to cart:', error);
-            alert("Failed to add item to cart.");
-        }
-    };
-    
-    
-    
 
     // Reusing the Header component from Canteen1
     const Header = () => {
@@ -177,13 +110,15 @@ const SunnySideupEgg = () => {
 
             {/* Buttons */}
             <div className="action-buttons">
-                    <button className="add-to-cart" onClick={addToCart}>
-                        Add to Cart
-                    </button>
-                    <button className="reserve-item" onClick={() => alert(`Reserved ${quantity} Sunny Sideup Egg(s)`)}>
-                        Reserve Item
-                    </button>
-                </div> 
+                <button className="add-to-cart" onClick={() => alert(`Added ${quantity} Sunny Sideup Egg(s) to cart!`)}>
+                    Add to Cart
+                </button>
+                <button className="reserve-item" onClick={() => alert(`Reserved ${quantity} Sunny Sideup Egg(s)`)}>
+                    Reserve Item
+                </button>
+               
+            </div>
+                   
             </div>
 
             {/* CSS styling */}
@@ -435,4 +370,4 @@ const SunnySideupEgg = () => {
     );
 };
 
-export default SunnySideupEgg;
+export default Spaghetti;

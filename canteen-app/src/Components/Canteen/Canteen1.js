@@ -3,22 +3,39 @@ import { useNavigate } from 'react-router-dom';
 import SunnySideupEgg from '../Foods/SunnySudeupEgg';
 import HotdugBun from '../Foods/HotdogBun';
 import GrilledChicken from '../Foods/GrilledChicken';
+import Sandwich from '../Foods/Sandwhich';
+import Spaghetti from '../Foods/Spaghetti';
+import HotCoffee from '../Foods/HotCoffee';
+import IceCream from '../Foods/IceCream';
+
+import './Canteen1.css'
 
 const Canteen1 = () => {
     const [activeMenu, setActiveMenu] = useState('breakfast'); // Track the active menu
     const navigate = useNavigate(); 
 
+    const handleBack = () => {
+        navigate(-1); // Go back to the previous route
+    };
+
     const Header = () => {
         return (
-            <header className="header">
-                <div className="logo">LOGO</div>
-                <nav className="nav-links">
-                    <a href="#menu">Menu</a>
-                    <a href="#cart">Cart</a>    
-                    <a href="#account">Account</a>
-                </nav>
-                <div className="canteen">Canteen 1</div>
-            </header>
+            <>
+                <header className="header">
+                    <div className="logo">LOGO</div>
+                    <nav className="nav-links">
+                        <a href="#menu">Menu</a>
+                        <a href="#cart">Cart</a>
+                        <a href="#account">Account</a>
+                    </nav>
+                    <div className="canteen">Canteen 1</div>
+                </header>
+                <div className="horizontal-line"></div> {/* Add this line */}
+                {/* Add text below the horizontal line */}
+           
+            
+          
+            </>
         );
     };
 
@@ -63,25 +80,25 @@ const Canteen1 = () => {
     const MenuGrid = () => {
         const menuItems = {
             breakfast: [
-                { name: 'Sunny Sideup Egg', imgSrc: 'sunny_side_up.png', component: SunnySideupEgg },
-                { name: 'Hotdog', imgSrc: 'asd.png', component: HotdugBun }, // Added Hotdog component
+                { name: 'Sunny Sideup Egg', imgSrc: 'eggs.png', component: SunnySideupEgg },
+                { name: 'Hotdog', imgSrc: 'hotdog.png', component: HotdugBun }, // Added Hotdog component
             ],
             lunch: [
                 { name: 'Grilled Chicken', imgSrc: 'asd.png', component: GrilledChicken },
+                { name: 'Spaghetti', imgSrc: 'asd.png', component: Spaghetti },
               
             ],
-            // snacks: [
-            //     { name: 'Sandwich', imgSrc: 'sandwich.png', component: SnackItem },
-            //     { name: 'Fries', imgSrc: 'fries.png', component: () => <div>Fries</div> },
-            // ],
-            // drinks: [
-            //     { name: 'Hot Coffee', imgSrc: 'hot_coffee.png', component: DrinkItem },
-            //     { name: 'Milk Tea', imgSrc: 'milk_tea.png', component: () => <div>Milk Tea</div> },
-            // ],
-            // dessert: [
-            //     { name: 'Ice Cream', imgSrc: 'ice_cream.png', component: DessertItem },
-            //     { name: 'Chocolate Cake', imgSrc: 'chocolate_cake.png', component: () => <div>Chocolate Cake</div> },
-            // ],
+            snacks: [
+                { name: 'Sandwich', imgSrc: 'sandwich.png', component: Sandwich },
+            
+            ],
+            drinks: [
+                { name: 'HotCoffee', imgSrc: 'hotcoffee.png', component: HotCoffee },
+              
+            ],
+            dessert: [
+                { name: 'IceCream', imgSrc: 'icecream.png', component: IceCream },
+            ],
         };
 
         const items = menuItems[activeMenu];
@@ -94,6 +111,14 @@ const Canteen1 = () => {
                 navigate('/canteen1/breakfast/hot-dog-bun');
             } else if (item.name === 'Grilled Chicken'){
                 navigate('/canteen1/lunch/grilled-chicken');
+            } else if (item.name === 'Sandwich'){
+                navigate('/canteen1/snacks/sand-wich')
+            } else if (item.name === 'Spaghetti'){
+                navigate('/canteen1/lunch/spaghetti')
+            } else if (item.name === 'HotCoffee'){
+                navigate('/canteen1/drinks/hot-coffee')
+            } else if (item.name === 'IceCream'){
+                navigate('/canteen1/dessert/ice-cream')
             }
             // Add more conditions for other food items as needed
         };
@@ -105,7 +130,7 @@ const Canteen1 = () => {
                 <div className="menu-items">
                     {items.map((item, index) => (
                         <div key={index} className="menu-item" onClick={() => handleItemClick(item)}>
-                            <img src={`/assets/${item.imgSrc}`} alt={item.name} />
+                            <img className="menu-item-image" src={`/assets/${item.imgSrc}`} alt={item.name} />
                             <span>{item.name}</span>
                         </div>
                     ))}

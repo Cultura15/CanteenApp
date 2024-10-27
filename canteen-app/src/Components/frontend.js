@@ -8,6 +8,10 @@ import Canteen1 from './Canteen/Canteen1';
 import SunnySideupEgg from './Foods/SunnySudeupEgg'; // Ensure the import path is correct
 import HotdugBun from './Foods/HotdogBun';
 import GrilledChicken from './Foods/GrilledChicken';
+import Sandwich from './Foods/Sandwhich';
+import Spaghetti from './Foods/Spaghetti';
+import HotCoffee from './Foods/HotCoffee';
+import IceCream from './Foods/IceCream';
 
 const Frontend = () => {
     const [step, setStep] = useState('register');
@@ -37,6 +41,10 @@ const Frontend = () => {
                 <Route path="/canteen1/breakfast/sunny-side-up" element={<SunnySideupEgg />} /> {/* Ensure this route matches */}
                 <Route path="/canteen1/breakfast/hot-dog-bun" element={< HotdugBun />} />
                 <Route path="/canteen1/lunch/grilled-chicken" element={< GrilledChicken />} />
+                <Route path="/canteen1/lunch/spaghetti" element={< Spaghetti />} />
+                <Route path="/canteen1/snacks/sand-wich" element={< Sandwich />} />
+                <Route path="/canteen1/drinks/hot-coffee" element={< HotCoffee />} />
+                <Route path="/canteen1/dessert/ice-cream" element={< IceCream />} />
             </Routes>
         </Router>
     );

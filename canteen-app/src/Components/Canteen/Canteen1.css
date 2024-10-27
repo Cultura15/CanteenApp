@@ -17,49 +17,68 @@
 /* Header Styles */
 .header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px; /* Added padding for better spacing */
-    background-color: #ffffff; /* Header background */
-    border-bottom: 2px solid #ddd; /* Slightly thicker border for a more defined separation */
+    align-items: center; /* Vertically center the content */
+    padding: 10px;
+    background-color: #e4dede;
+    color: black;
+    position: fixed; /* Fix it at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px; /* Set a consistent height */
+    z-index: 1000; /* Ensure it stays on top of other elements */
+    
+}
+
+.canteen {
+    margin-left: auto; /* Pushes canteen text to the far right */
+    color: black;
+    background-color: #f9a72e; /* Background color */
+    padding: 10px 20px; /* Optional: Padding for spacing */
+    border-radius: 5px; /* Optional: Rounded corners */
+    display: flex; /* Use flex to center the text */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Fill the height of the header */
 }
  
 .logo {
-    font-size: 1.5em;
-    font-weight: bold; /* Made the logo bold */
-    color: #333; /* Darker color for the logo */
-}
- 
-.nav-links a {
-    margin: 0 15px; /* Increased margin for better spacing */
-    text-decoration: none;
-    color: #333; /* Darker color for the links */
-    transition: color 0.3s; /* Smooth color transition */
-}
- 
-.nav-links a:hover {
-    color: #f9a72e; /* Change color on hover */
-}
- 
-.canteen {
-    background-color: #f9a72e; /* Background color for Canteen */
-    padding: 5px 15px; /* Added padding for better appearance */
-    border-radius: 4px;
-    color: white;
+    font-size: 24px;
     font-weight: bold;
+    margin-right: 20px; /* Space between logo and nav links */
 }
+
+.nav-links {
+    display: flex;
+    gap: 20px; /* Space between the links */
+}
+
+.nav-links a {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+}
+
  
 /* Separator Line */
 .separator {
-    height: 2px;
-    background-color: #ddd; /* Lighter color for a softer look */
-    margin: 10px 0;
+    position: fixed; /* Fixes the position of the line */
+    top: 160px; /* Adjust this value to position it below the header */
+    width: 100%; /* Full width of the viewport */
+    height: 2px; /* Height of the line */
+    background-color: #545454; /* Color of the line */
+    z-index: 999; /* Ensure it stays on top of other elements */
+    left: 0px;
 }
  
 /* Sub Menu Navigation */
 .sub-menu-nav {
-    display: flex;
-    justify-content: space-around;
+    position: fixed;
+    top: 100px;
+    left: 15px;
     padding: 10px 0; /* Added padding for spacing */
     border-bottom: 2px solid #ddd; /* Thicker border for separation */
 }
@@ -90,7 +109,9 @@
  
 /* Sidebar Styles */
 .sidebar {
-    flex: 1;
+    position: fixed;
+    left: 20px;
+    top: 200px;
     padding: 20px;
     background-color: #f4f4f4;
     border-right: 2px solid #ccc; /* Thicker border for sidebar */
@@ -120,15 +141,18 @@
  
 /* Menu Grid Styles */
 .menu-grid {
-    flex: 3;
+    position: fixed;
+    top: 150px;
+    left: 300px;
     padding: 20px;
     overflow-y: auto; /* Enable scrolling if content exceeds view */
 }
  
 .menu-items {
+    position: fixed;
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px; /* Space between items */
+    top: 250px;
+    gap: 200px; /* Space between items */
 }
  
 /* Menu Item Styles */
@@ -147,8 +171,8 @@
 }
  
 .menu-item-image {
-    width: 50px; /* Adjust image size */
-    height: 50px; /* Adjust image size */
+    width: 130px; /* Adjust image size */
+    height: 130px; /* Adjust image size */
     border-radius: 50%; /* Circle image style */
     margin-right: 10px; /* Space between image and text */
     border: 2px solid #ccc; /* Add border around images */
@@ -177,4 +201,14 @@
     object-fit: cover; /* This ensures the image covers the area */
     border-radius: 10px; /* Optional: rounded corners */
     border: 2px solid #ccc; /* Optional: border around the image */
+}
+
+.horizontal-line {
+    position: fixed; /* Fixes the position of the line */
+    top: 80px; /* Adjust this value to position it below the header */
+    width: 100%; /* Full width of the viewport */
+    height: 4px; /* Height of the line */
+    background-color: #000000; /* Color of the line */
+    z-index: 999; /* Ensure it stays on top of other elements */
+    left: 0px;
 }

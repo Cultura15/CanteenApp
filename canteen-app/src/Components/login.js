@@ -20,17 +20,27 @@ const Login = ({ onSuccess }) => {
         event.preventDefault();
         try {
             const response = await axios.post('http://localhost:8080/api/users/login', loginData);
-            alert('User logged in successfully!');
-            localStorage.setItem('user_id', response.data.user_id); 
+            
+            // Log the entire response to check the structure
+            console.log('Login Response:', response.data);
     
-            // Call the onSuccess prop to indicate a successful login
-            onSuccess();
-            navigate('/canteenSelection'); // Navigate to the canteen selection page on successful login
+            // Assuming the response.data contains the user object with user_id
+            if (response.data && response.data.userId) { // Ensure userId matches your backend
+                alert('User logged in successfully!');
+                localStorage.setItem('user_id', response.data.userId); // Store the user ID
+                
+                // Call the onSuccess prop to indicate a successful login
+                onSuccess();
+                navigate('/canteenSelection'); // Navigate to the canteen selection page
+            } else {
+                alert('Login failed: User ID not found in response.'); // Handle case where user_id is not returned
+            }
         } catch (error) {
             console.error('Login Error:', error);
             alert('Failed to log in.');
         }
     };
+    
 
     return (
         <div className="form-container">
