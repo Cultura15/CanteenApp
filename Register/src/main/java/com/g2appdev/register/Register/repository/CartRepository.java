@@ -7,4 +7,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CartRepository extends JpaRepository<CartEntity, Integer> {
     CartEntity findByUser_UserId(int userId); // Adjusted to reflect the userId field in RegisterEntity
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a4a422e (second commit)

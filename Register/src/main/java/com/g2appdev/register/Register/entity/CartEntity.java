@@ -61,4 +61,8 @@ public class CartEntity {
     }
 
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a4a422e (second commit)

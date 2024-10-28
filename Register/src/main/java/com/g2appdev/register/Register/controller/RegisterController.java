@@ -66,5 +66,9 @@ public class RegisterController {
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
     
+<<<<<<< HEAD
 }
 
+=======
+}
+>>>>>>> a4a422e (second commit)

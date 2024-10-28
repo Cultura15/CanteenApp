@@ -122,4 +122,8 @@ public class CartItemController {
         cartItemService.deleteCartItem(id);
         return ResponseEntity.noContent().build();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a4a422e (second commit)

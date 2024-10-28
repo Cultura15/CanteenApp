@@ -72,4 +72,8 @@ public class CartItemEntity {
     public void setPrice(double price) {
         this.price = price;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a4a422e (second commit)

@@ -45,4 +45,8 @@ public class CartItemDTO {
     public void setMenuItemId(int menuItemId) {
         this.menuItemId = menuItemId;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a4a422e (second commit)
