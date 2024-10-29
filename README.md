@@ -19,3 +19,4 @@ Members: <br>
 
 */kenneth/*
 */emman/*
+*/test2/*
