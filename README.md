@@ -17,4 +17,4 @@ Members: <br>
 <br> <br>
 
 
-*/test/*
+*/kenneth/*
