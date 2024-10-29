@@ -9,7 +9,7 @@ const Login = ({ onSuccess }) => {
         password: ''
     });
     
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate();
 
     const handleLoginChange = (event) => {
         const { id, value } = event.target;
@@ -18,20 +18,36 @@ const Login = ({ onSuccess }) => {
 
     const submitLoginForm = async (event) => {
         event.preventDefault();
+
+        // Check if admin credentials are entered
+        if (loginData.email === 'admin@gmail.com' && loginData.password === 'canteen123') {
+            alert('Admin logged in successfully!');
+            localStorage.setItem('user_id', '3'); // Set user_id for admin in localStorage
+            onSuccess(); // Call onSuccess to update any relevant app state
+            navigate('/admin'); // Navigate to the admin page
+            return;
+        }
+        
+        // Process normal user login
         try {
             const response = await axios.post('http://localhost:8080/api/users/login', loginData);
-            alert('User logged in successfully!');
-            localStorage.setItem('user_id', response.data.user_id); 
-    
-            // Call the onSuccess prop to indicate a successful login
-            onSuccess();
-            navigate('/canteenSelection'); // Navigate to the canteen selection page on successful login
+            console.log('Login Response:', response.data);
+
+            // Check if userId is returned in the response data
+            if (response.data && response.data.userId) {
+                alert('User logged in successfully!');
+                localStorage.setItem('user_id', response.data.userId); // Store the user ID for the logged-in user
+                onSuccess();
+                navigate('/canteenSelection'); // Navigate to the canteen selection page
+            } else {
+                alert('Login failed: User ID not found in response.');
+            }
         } catch (error) {
             console.error('Login Error:', error);
             alert('Failed to log in.');
         }
     };
-
+    
     return (
         <div className="form-container">
             <h2>Login</h2>

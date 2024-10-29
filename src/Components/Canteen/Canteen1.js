@@ -56,7 +56,7 @@ const Canteen1 = () => {
     const Header = () => {
         return (
             <>
-                <header className="header">
+                <header className="header"> 
                     <div className="logo">LOGO</div>
                     <nav className="nav-links">
                         <a href="#menu">Menu</a>

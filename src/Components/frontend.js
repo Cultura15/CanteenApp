@@ -60,6 +60,8 @@ import BananaSmoothie from './Foods/BananaSmoothie';
 import LemonJuice from './Foods/LemonJuice';
 import Cart from './Cart';
 import Cart2 from './Cart2';
+import AdminPage from './AdminPage';
+import Users from './Users';
 
 const Frontend = () => {
     const [step, setStep] = useState('register');
@@ -184,6 +186,9 @@ const Frontend = () => {
                 <Route path="/canteen3/dessert/halo-halo" element={< HaloHalo />} />
                 <Route path="/canteen3/dessert/leche-flan" element={< LecheFlan />} />
                 <Route path="/canteen3/dessert/mango-float" element={< MangoFloat />} />
+
+                <Route path="/admin" element={<AdminPage />} />
+                <Route path="/admin/users" element={<Users />} />
 
             </Routes>
         </Router>
