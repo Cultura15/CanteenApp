@@ -9,8 +9,5 @@ public interface RegisterRepository extends JpaRepository<RegisterEntity, Intege
 	
 	RegisterEntity findByEmail(String email);
 
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> a4a422e (second commit)

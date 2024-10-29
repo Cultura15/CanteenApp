@@ -55,8 +55,5 @@ public class CartService {
     public void deleteCart(int cartId) {
         cartRepository.deleteById(cartId);
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> a4a422e (second commit)

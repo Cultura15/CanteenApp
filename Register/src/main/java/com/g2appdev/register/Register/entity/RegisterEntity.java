@@ -88,8 +88,6 @@ public RegisterEntity() {}
     public void setPassword(String password) {
         this.password = password;
     }
-<<<<<<< HEAD
+
 }
-=======
-}	
->>>>>>> a4a422e (second commit)
+

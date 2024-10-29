@@ -25,9 +25,7 @@ public class CartDTO {
     public void setCartItems(List<CartItemDTO> cartItems) {
         this.cartItems = cartItems;
     }
-<<<<<<< HEAD
+
 }
 
-=======
-}
->>>>>>> a4a422e (second commit)
+

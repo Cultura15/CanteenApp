@@ -60,9 +60,5 @@ public class CartEntity {
         this.cartItems = cartItems;
     }
 
+}
 
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> a4a422e (second commit)

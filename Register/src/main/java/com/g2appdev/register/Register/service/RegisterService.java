@@ -17,24 +17,43 @@ public class RegisterService {
     private RegisterRepository registerRepository;
 
     public RegisterEntity registerUser(RegisterEntity user) {
-        // Optionally, you can add validations or checks here
         return registerRepository.save(user);
     }
-    
+
     public Optional<RegisterEntity> findById(int userId) {
         return registerRepository.findById(userId);
     }
-    
+
     public List<RegisterEntity> findAllUsers() {
-        return registerRepository.findAll(); // Assuming you have a repository for accessing data
+        return registerRepository.findAll();
     }
-    
+
     public Optional<RegisterEntity> loginUser(Login loginRequest) {
         RegisterEntity user = registerRepository.findByEmail(loginRequest.getEmail());
-        if (user != null && user.getPassword().equals(loginRequest.getPassword())) { // Use BCryptPasswordEncoder for encrypted passwords
+        if (user != null && user.getPassword().equals(loginRequest.getPassword())) {
             return Optional.of(user);
         }
         return Optional.empty();
     }
 
+    // New method to update a user
+    public Optional<RegisterEntity> updateUser(int userId, RegisterEntity updatedUser) {
+        return registerRepository.findById(userId)
+                .map(user -> {
+                    user.setFname(updatedUser.getFname());
+                    user.setLname(updatedUser.getLname());
+                    user.setEmail(updatedUser.getEmail());
+                    user.setPassword(updatedUser.getPassword()); // Make sure to handle password securely
+                    return registerRepository.save(user);
+                });
+    }
+
+    // New method to delete a user
+    public boolean deleteUser(int userId) {
+        if (registerRepository.existsById(userId)) {
+            registerRepository.deleteById(userId);
+            return true;
+        }
+        return false;
+    }
 }

@@ -28,10 +28,6 @@ public class MenuService {
 
         // Set the user to the menuItem
         menuItem.setUser(user);
-<<<<<<< HEAD
-
-=======
->>>>>>> a4a422e (second commit)
         return menuItemRepository.save(menuItem);
     }
 
@@ -40,43 +36,23 @@ public class MenuService {
     }
 
     public MenuEntity putMenuItemDetails(int id, MenuEntity newMenuItemDetails) {
-<<<<<<< HEAD
-        MenuEntity menuItem = menuItemRepository.findById(id)
-            .orElseThrow(() -> new NoSuchElementException("Menu item not found"));
-
-        // Update details
-        menuItem.setName(newMenuItemDetails.getName());
-        menuItem.setDescription(newMenuItemDetails.getDescription());
-        menuItem.setPrice(newMenuItemDetails.getPrice());
-        menuItem.setCategory(newMenuItemDetails.getCategory());
-        menuItem.setImage(newMenuItemDetails.getImage());
-=======
         // Fetch the existing menu item
         MenuEntity menuItem = menuItemRepository.findById(id)
             .orElseThrow(() -> new NoSuchElementException("Menu item not found"));
 
         // Update the menu item details
         updateMenuItem(menuItem, newMenuItemDetails);
->>>>>>> a4a422e (second commit)
 
         return menuItemRepository.save(menuItem);
     }
 
     @Transactional
     public String deleteMenuItem(int id) {
-<<<<<<< HEAD
-=======
         // Check if the menu item exists before attempting to delete
->>>>>>> a4a422e (second commit)
         if (menuItemRepository.findById(id).isPresent()) {
             menuItemRepository.deleteById(id);
             return "Menu item record successfully deleted!";
         } else {
-<<<<<<< HEAD
-            return id + " NOT found!";
-        }
-    }
-=======
             return "Menu item with ID " + id + " NOT found!";
         }
     }
@@ -90,5 +66,4 @@ public class MenuService {
         menuItem.setImage(newMenuItemDetails.getImage());
         menuItem.setCategory(newMenuItemDetails.getCategory());
     }
->>>>>>> a4a422e (second commit)
 }

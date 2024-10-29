@@ -14,11 +14,12 @@ public class CartItemEntity {
     @JsonIgnore
     private int cartItemId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "cart_id")
+    @JsonIgnore
     private CartEntity cart;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "menu_id",  nullable = false)
     private MenuEntity menuItem;
 
@@ -72,8 +73,5 @@ public class CartItemEntity {
     public void setPrice(double price) {
         this.price = price;
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> a4a422e (second commit)

@@ -88,8 +88,6 @@ public class CartItemService {
     public void updateCart(CartEntity cart) {
         cartRepository.save(cart);
     }
-<<<<<<< HEAD
+
 }
-=======
-}
->>>>>>> a4a422e (second commit)
+
