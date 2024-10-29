@@ -1,0 +1,133 @@
+/* src/PaymentMethod.css */
+.container {
+  max-width: 450px;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.paymentMethod {
+  margin-bottom: 20px;
+}
+
+.paymentOption {
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  margin-bottom: 15px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.paymentOption:hover {
+  background-color: #f0f0f0;
+}
+
+.paymentOption.selected {
+  border-color: orange;
+  background-color: #ffebcc;
+}
+
+.topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.paymentOption img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.cardIcons {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.cardIcons img {
+  width: 32px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.summary {
+  margin-top: 20px;
+  background-color: #f0f0f0;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.summaryTitle {
+  font-size: 1.5rem;
+  margin-bottom: 50px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between; /* Keeps content justified */
+  margin-bottom: 8px;
+  align-items: center; /* Aligns items vertically centered */
+}
+
+.summaryRow strong {
+  min-width: 150px; /* Increase min-width for better spacing */
+  text-align: left; /* Aligns the label to the left */
+}
+
+.summaryRow span {
+  flex-grow: 1; /* Allows the span to grow and fill space */
+  text-align: right; /* Aligns the value to the right */
+}
+
+
+.submitButton {
+  display: block;
+  width: 200px; /* Increase width to make it larger */
+  padding: 15px; /* Increase padding for a bigger button */
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  border-radius: 8px; /* Slightly larger border radius for a rounded look */
+  font-weight: bold;
+  font-size: 15px; /* Increase font size */
+  cursor: pointer;
+  margin: 20px auto 0; /* Adds spacing at the top and centers it */
+}
+
+
+.submitButton:hover {
+  background-color: #e55a00;
+}
+
+.message {
+  margin-top: 20px;
+  color: green;
+  font-weight: bold;
+  text-align: center;
+}
+
+.cardIcons {
+  display: flex;
+  margin-left: 280px;
+  margin-top: 10px; /* Space from the payment method label */
+  padding: 10px; /* Add some padding for better visuals */
+}
+
+.cardIcon {
+  width: 40px; /* Adjust size as needed */
+  height: auto; /* Maintain aspect ratio */
+}
