@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const HotDogBun = () => {
@@ -89,7 +89,9 @@ const HotDogBun = () => {
             cart: { cartId: cart.cartId },           // Reference to the cart
             menuItem: { menuItemID: menuItem.menuItemID }, // Adjusted key to match your DTO
             quantity: quantity, // This quantity is the amount you want to add
-            price: menuItem.price // You may also want to include the price if needed
+            price: menuItem.price,
+            name: menuItem.name,
+            category: menuItem.category // You may also want to include the price if needed
         };
     
         console.log('Sending cart item data:', cartItemData); // Debugging log
@@ -112,8 +114,8 @@ const HotDogBun = () => {
                 <header className="header">
                     <div className="logo">LOGO</div>
                     <nav className="nav-links">
-                        <a href="#menu">Menu</a>
-                        <a href="#cart">Cart</a>
+                    <Link to="/canteen1/">Menu</Link>
+                        <Link to="/canteen1/cart">Cart</Link> 
                         <a href="#account">Account</a>
                     </nav>
                     <div className="canteen">Canteen 1</div>

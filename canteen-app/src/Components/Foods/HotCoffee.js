@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const HotCoffee = () => {
@@ -47,8 +47,8 @@ const HotCoffee = () => {
                 <header className="header">
                     <div className="logo">LOGO</div>
                     <nav className="nav-links">
-                        <a href="#menu">Menu</a>
-                        <a href="#cart">Cart</a>
+                    <Link to="/canteen1/">Menu</Link>
+                        <Link to="/canteen1/cart">Cart</Link>
                         <a href="#account">Account</a>
                     </nav>
                     <div className="canteen">Canteen 1</div>

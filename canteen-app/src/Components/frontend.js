@@ -4,14 +4,20 @@ import Register from './register';
 import Login from './login';
 import CanteenSelection from './Canteen/CanteenSelection';
 import Canteen1 from './Canteen/Canteen1'; 
+import Payment from './Payment/Payment';
+import Cart from './Cart';
+import Feedback from './Feedback';
 
-import SunnySideupEgg from './Foods/SunnySudeupEgg'; // Ensure the import path is correct
+//Menu items imported
+import SunnySideupEgg from './Foods/SunnySudeupEgg'; 
 import HotdugBun from './Foods/HotdogBun';
 import GrilledChicken from './Foods/GrilledChicken';
 import Sandwich from './Foods/Sandwhich';
 import Spaghetti from './Foods/Spaghetti';
 import HotCoffee from './Foods/HotCoffee';
 import IceCream from './Foods/IceCream';
+
+
 
 const Frontend = () => {
     const [step, setStep] = useState('register');
@@ -37,7 +43,10 @@ const Frontend = () => {
                 <Route path="/register" element={<Register onSuccess={handleRegistrationSuccess} onSwitch={() => setStep('login')} />} />
                 <Route path="/login" element={<Login onSuccess={handleLoginSuccess} />} />
                 <Route path="/canteenSelection" element={<CanteenSelection onSelectCanteen={handleSelectCanteen} />} />
+                <Route path ="/payment" element={<Payment />} />
                 <Route path="/canteen1" element={<Canteen1 />} />
+                <Route path="/canteen1/cart" element={<Cart />} />
+                <Route path="/feedback" element={<Feedback />} />
                 <Route path="/canteen1/breakfast/sunny-side-up" element={<SunnySideupEgg />} /> {/* Ensure this route matches */}
                 <Route path="/canteen1/breakfast/hot-dog-bun" element={< HotdugBun />} />
                 <Route path="/canteen1/lunch/grilled-chicken" element={< GrilledChicken />} />
@@ -45,6 +54,7 @@ const Frontend = () => {
                 <Route path="/canteen1/snacks/sand-wich" element={< Sandwich />} />
                 <Route path="/canteen1/drinks/hot-coffee" element={< HotCoffee />} />
                 <Route path="/canteen1/dessert/ice-cream" element={< IceCream />} />
+                
             </Routes>
         </Router>
     );

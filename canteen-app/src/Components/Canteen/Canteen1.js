@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import SunnySideupEgg from '../Foods/SunnySudeupEgg';
 import HotdugBun from '../Foods/HotdogBun';
 import GrilledChicken from '../Foods/GrilledChicken';
@@ -11,11 +11,20 @@ import IceCream from '../Foods/IceCream';
 import './Canteen1.css'
 
 const Canteen1 = () => {
-    const [activeMenu, setActiveMenu] = useState('breakfast'); // Track the active menu
+    const location = useLocation();
     const navigate = useNavigate(); 
+    const searchParams = new URLSearchParams(location.search);
+    const initialCategory = searchParams.get('category') || 'breakfast';
+    const [activeMenu, setActiveMenu] = useState(initialCategory);
 
-    const handleBack = () => {
-        navigate(-1); // Go back to the previous route
+    useEffect(() => {
+        setActiveMenu(initialCategory);
+    }, [initialCategory]);
+
+    const handleItemClick = (item) => {
+        const formattedName = item.name.toLowerCase().replace(/\s+/g, '-');
+        const route = `/canteen1/${activeMenu}/${formattedName}`;
+        navigate(route);
     };
 
     const Header = () => {
@@ -24,8 +33,8 @@ const Canteen1 = () => {
                 <header className="header">
                     <div className="logo">LOGO</div>
                     <nav className="nav-links">
-                        <a href="#menu">Menu</a>
-                        <a href="#cart">Cart</a>
+                     <Link to="/canteen1/">Menu</Link>
+                        <Link to="/canteen1/cart">Cart</Link> 
                         <a href="#account">Account</a>
                     </nav>
                     <div className="canteen">Canteen 1</div>
@@ -33,23 +42,25 @@ const Canteen1 = () => {
                 <div className="horizontal-line"></div> {/* Add this line */}
                 {/* Add text below the horizontal line */}
            
-            
-          
+             
             </>
         );
     };
 
-    const SubMenuNav = () => {
-        return (
-            <nav className="sub-menu-nav">
-                <a href="#breakfast" className={activeMenu === 'breakfast' ? 'active' : ''} onClick={() => setActiveMenu('breakfast')}>Breakfast</a>
-                <a href="#lunch" className={activeMenu === 'lunch' ? 'active' : ''} onClick={() => setActiveMenu('lunch')}>Lunch</a>
-                <a href="#snacks" className={activeMenu === 'snacks' ? 'active' : ''} onClick={() => setActiveMenu('snacks')}>Snacks</a>
-                <a href="#drinks" className={activeMenu === 'drinks' ? 'active' : ''} onClick={() => setActiveMenu('drinks')}>Drinks</a>
-                <a href="#dessert" className={activeMenu === 'dessert' ? 'active' : ''} onClick={() => setActiveMenu('dessert')}>Dessert</a>
-            </nav>
-        );
-    };
+    const SubMenuNav = () => (
+        <nav className="sub-menu-nav">
+            {['breakfast', 'lunch', 'snacks', 'drinks', 'dessert'].map((category) => (
+                <Link
+                    key={category}
+                    to={`?category=${category}`}
+                    className={activeMenu === category ? 'active' : ''}
+                    onClick={() => setActiveMenu(category)}
+                >
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                </Link>
+            ))}
+        </nav>
+    );
 
     const Sidebar = () => {
         return (
