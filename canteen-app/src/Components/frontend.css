@@ -1,0 +1,82 @@
+/* Styling the container */
+.container {
+  width: 60%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Styling the heading */
+h1 {
+  text-align: center;
+  color: #7f8d81;
+}
+
+/* Styling the form container */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adds space between elements */
+}
+
+/* Input styling */
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Button styling */
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Styling the list of order items */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  background-color: #f9f9f9;
+  margin: 10px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Aligns items vertically */
+}
+
+/* Button styles in list */
+ul li button {
+  padding: 5px 10px;
+}
+
+ul li button.edit {
+  background-color: #28a745;
+}
+
+ul li button.delete {
+  background-color: #dc3545;
+}
+
+ul li button:hover {
+  opacity: 0.8; /* Slight transparency on hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+      width: 90%;
+  }
+}
