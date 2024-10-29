@@ -17,15 +17,5 @@ Members: <br>
 <br> <br>
 
 
-*/kenneth/*
-
-*/emman/*
-*/test2/*
-=======
-
-*/ashlmao/*
-*/ARTLMAO/*
-=======
-*/emman/*
 
 
