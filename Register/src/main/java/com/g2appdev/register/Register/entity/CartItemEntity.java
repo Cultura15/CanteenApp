@@ -24,20 +24,31 @@ public class CartItemEntity {
     private MenuEntity menuItem;
 
     @Column(name = "quantity", nullable = false)
-    private int quantity = 1; // Default value to avoid SQL errors
+    private int quantity = 1; 
 
     @Column(name = "price", nullable = false)
     private double price;
+    
+    @Column(name = "name", nullable = false)
+    private String name;
+    
+    @Column(name = "category", nullable = false)
+    private String category;
 
     public CartItemEntity() {}
 
-    public CartItemEntity(CartEntity cart, MenuEntity menuItem, int quantity, double price) {
+    public CartItemEntity(CartEntity cart, MenuEntity menuItem, int quantity, double price, String name, String category) {
         this.cart = cart;
         this.menuItem = menuItem;
         this.quantity = quantity;
         this.price = price;
+        this.name= name;
+        this.category = category;
+        
     }
-
+    
+    
+    //Getters Setters
     public int getCartItemId() {
         return cartItemId;
     }
@@ -73,5 +84,24 @@ public class CartItemEntity {
     public void setPrice(double price) {
         this.price = price;
     }
+<<<<<<< HEAD
 
+=======
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+>>>>>>> add469f (fourth commit)
 }

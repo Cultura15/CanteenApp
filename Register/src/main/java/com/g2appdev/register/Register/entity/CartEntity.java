@@ -1,7 +1,6 @@
 package com.g2appdev.register.Register.entity;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import jakarta.persistence.*;
@@ -31,7 +30,14 @@ public class CartEntity {
         this.totalAmount = totalAmount;
         this.user = user;
     }
+    
+    public CartEntity(int cartId) {
+        this.cartId = cartId;
+    }
+    
+    
 
+    //Getters Setters
     public int getCartId() {
         return cartId;
     }

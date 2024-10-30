@@ -31,8 +31,9 @@ public class RegisterEntity {
     		cascade = CascadeType.ALL)
     private List<MenuEntity> menu;
     
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<CartEntity> carts; //newely added
+    @OneToMany(mappedBy = "user", 
+    		cascade = CascadeType.ALL)
+    private List<CartEntity> carts; 
 
     
     

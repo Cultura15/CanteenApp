@@ -19,16 +19,22 @@ public class CartService {
     @Autowired
     private RegisterRepository registerRepository;
 
-    // This method checks if a cart exists for the user; if not, it creates a new one
+    
+    
+    //Method to create a Cart
+    public CartEntity createCart(CartEntity cart) {
+        return cartRepository.save(cart);
+    }
+    
+    
+    // Method to check if a cart exists for the user; if not, it creates a new one
     public CartEntity createOrGetCart(int userId) {
         CartEntity existingCart = cartRepository.findByUser_UserId(userId);
-
-        // Return the existing cart if it exists
+    
         if (existingCart != null) {
             return existingCart;
         }
 
-        // Otherwise, create a new cart
         RegisterEntity user = registerRepository.findById(userId)
             .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -39,21 +45,59 @@ public class CartService {
         return cartRepository.save(newCart);
     }
     
-    public CartEntity createCart(CartEntity cart) {
-        return cartRepository.save(cart);
-    }
-
-
+    
+    
+    //Method to GET all carts
     public List<CartEntity> getAllCarts() {
         return cartRepository.findAll();
     }
 
+    //Method to GET a cart by UserID
     public CartEntity getCartByUserId(int userId) {
         return cartRepository.findByUser_UserId(userId);
     }
-
-    public void deleteCart(int cartId) {
-        cartRepository.deleteById(cartId);
+    
+    // Method to UPDATE a cart
+    public CartEntity updateCart(int id, CartEntity updatedCart) {
+        CartEntity existingCart = cartRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Cart not found"));
+        
+        existingCart.setTotalAmount(updatedCart.getTotalAmount());
+    
+        
+        return cartRepository.save(existingCart);
     }
 
+    
+    // Method to DELETE a cart
+    public void deleteCart(int cartId) {
+        if (!cartRepository.existsById(cartId)) {
+            throw new RuntimeException("Cart not found");
+        }
+        cartRepository.deleteById(cartId);
+    }
+<<<<<<< HEAD
+
+=======
+    
+//    public CartItemDTO convertToDTO(CartItemEntity cartItemEntity) {
+//        MenuItemDTO menuItemDTO = null;
+//        
+//        if (cartItemEntity.getMenuItem() != null) {
+//            menuItemDTO = new MenuItemDTO(); // Initialize and set properties
+//            menuItemDTO.setMenuItemID(cartItemEntity.getMenuItem().getMenuItemID());
+//            menuItemDTO.setName(cartItemEntity.getMenuItem().getName());
+//            // Set other fields as necessary
+//        }
+//
+//        return new CartItemDTO(
+//            cartItemEntity.getCartItemId(),
+//            cartItemEntity.getName(),
+//            cartItemEntity.getPrice(),
+//            cartItemEntity.getQuantity(),
+//            menuItemDTO
+//        );
+//    }
+    
+>>>>>>> add469f (fourth commit)
 }

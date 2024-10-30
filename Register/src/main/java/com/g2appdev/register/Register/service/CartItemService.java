@@ -1,18 +1,13 @@
 package com.g2appdev.register.Register.service;
 
-import com.g2appdev.register.Register.entity.CartEntity;
 import com.g2appdev.register.Register.entity.CartItemEntity;
 import com.g2appdev.register.Register.entity.MenuEntity;
 import com.g2appdev.register.Register.repository.CartItemRepository;
 import com.g2appdev.register.Register.repository.CartRepository;
 import com.g2appdev.register.Register.repository.MenuRepository;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,18 +19,12 @@ public class CartItemService {
     private CartItemRepository cartItemRepository;
 
     @Autowired
-    private CartRepository cartRepository;
-    
-    @Autowired
     private MenuRepository menuRepository;
     
+    @Autowired CartRepository cartRepository;
     
-
-//
-//    public CartItemEntity createCartItem(CartItemEntity cartItem) {
-//        return cartItemRepository.save(cartItem);
-//    }
     
+    //Method to create a cartItem
     public CartItemEntity createCartItem(CartItemEntity cartItem) {
         // Check if menuItem is correctly set
         if (cartItem.getMenuItem() == null || cartItem.getMenuItem().getMenuItemID() == 0) {
@@ -63,31 +52,52 @@ public class CartItemService {
     }
 
 
+    //Method to GET all cart items
     public List<CartItemEntity> getAllCartItems() {
         return cartItemRepository.findAll();
     }
     
+    //Method to GET a specific cart item by CartId, which has been assign to a user.
     public List<CartItemEntity> getCartItemsByCartId(int cartId) {
         return cartItemRepository.findByCart_CartId(cartId);
     }
 
+    //Method to GET a specific cart item.
     public CartItemEntity getCartItemById(int cartItemId) {
         return cartItemRepository.findById(cartItemId).orElse(null);
     }
+    
+ // Method to UPDATE a cart item
+    public CartItemEntity updateCartItem(int cartItemId, CartItemEntity updatedCartItem) {
+        CartItemEntity existingCartItem = cartItemRepository.findById(cartItemId)
+            .orElseThrow(() -> new RuntimeException("Cart item not found"));
 
+        existingCartItem.setQuantity(updatedCartItem.getQuantity());
+        
+        // Update menu item if necessary
+        if (updatedCartItem.getMenuItem() != null) {
+            existingCartItem.setMenuItem(updatedCartItem.getMenuItem());
+        }
+
+        return cartItemRepository.save(existingCartItem);
+    }
+
+    
+    
+    //Method to DELETE a cart item
     public void deleteCartItem(int cartItemId) {
         cartItemRepository.deleteById(cartItemId);
     }
-
-    public CartEntity getCartById(int cartId) {
-        return cartRepository.findById(cartId).orElse(null);
-    }
     
-   
+ 
 
+<<<<<<< HEAD
     public void updateCart(CartEntity cart) {
         cartRepository.save(cart);
     }
 
+=======
+ 
+>>>>>>> add469f (fourth commit)
 }
 

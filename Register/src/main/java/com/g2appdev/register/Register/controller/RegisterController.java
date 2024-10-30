@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.PutMapping; // Import PutMapping
+=======
+import org.springframework.web.bind.annotation.PutMapping;
+>>>>>>> add469f (fourth commit)
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,13 +32,20 @@ public class RegisterController {
 
     @Autowired
     private RegisterService registerService;
-
+    
+    
+    //register user
     @PostMapping("/register")
     public ResponseEntity<RegisterEntity> registerUser(@RequestBody RegisterEntity user) {
         RegisterEntity createdUser = registerService.registerUser(user);
         return ResponseEntity.ok(createdUser);
     }
+<<<<<<< HEAD
 
+=======
+    
+    // GET user through userId
+>>>>>>> add469f (fourth commit)
     @GetMapping("/id/{userId}")
     public ResponseEntity<RegisterEntity> getUserById(@PathVariable int userId) {
         return registerService.findById(userId)
@@ -42,23 +53,57 @@ public class RegisterController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    //GET all users
     @GetMapping
     public ResponseEntity<List<RegisterEntity>> getAllUsers() {
         List<RegisterEntity> users = registerService.findAllUsers();
         return ResponseEntity.ok(users);
     }
 
+<<<<<<< HEAD
+=======
+    
+    //POST registered user to log in
+>>>>>>> add469f (fourth commit)
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Login loginRequest) {
         return registerService.loginUser(loginRequest)
                 .map(user -> {
                     Map<String, Object> response = new HashMap<>();
+<<<<<<< HEAD
                     response.put("userId", user.getUserId());
                     response.put("email", user.getEmail());
+=======
+                    response.put("userId", user.getUserId()); 
+                    response.put("email", user.getEmail()); 
+>>>>>>> add469f (fourth commit)
                     return ResponseEntity.ok(response);
                 })
                 .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
+<<<<<<< HEAD
+=======
+    
+ 	//UPDATE user
+    @PutMapping("/update/{userId}")
+    public ResponseEntity<RegisterEntity> updateUser(@PathVariable int userId, @RequestBody RegisterEntity updatedUser) {
+        return registerService.updateUser(userId, updatedUser)
+                .map(user -> ResponseEntity.ok(user))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    //DELETE user
+    @DeleteMapping("/delete/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable int userId) {
+        boolean deleted = registerService.deleteUser(userId);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+    
+}
+>>>>>>> add469f (fourth commit)
 
     // New endpoint to update a user
     @PutMapping("/update/{userId}")
