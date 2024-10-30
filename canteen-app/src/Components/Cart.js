@@ -54,6 +54,12 @@ const Cart = () => {
         }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem("user_id"); // Remove user ID from local storage
+        navigate('/login'); // Redirect to login page
+    };
+
+
     return (
         <div className="cart-page">
             <header className="header">
@@ -62,6 +68,7 @@ const Cart = () => {
                     <Link to="/canteen1/">Menu</Link>
                     <a href="#cart">Cart</a>
                     <a href="#account">Account</a>
+                    <button onClick={handleLogout} className="logout-button">Log Out</button>
                 </nav>
                 <div className="canteen">Canteen 1</div>
             </header>

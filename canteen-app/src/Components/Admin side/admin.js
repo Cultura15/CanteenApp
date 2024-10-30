@@ -11,6 +11,7 @@ const AdminPage = () => {
         description: '',
         image: '',
     });
+    const navigate = useNavigate();
     const [menuItems, setMenuItems] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [currentItemId, setCurrentItemId] = useState(null);
@@ -135,6 +136,12 @@ const AdminPage = () => {
         return acc;
     }, {});
 
+    const handleLogout = () => {
+        localStorage.removeItem("user_id"); // Remove user ID from local storage
+        navigate('/login'); // Redirect to login page
+    };
+
+
     return (
         <div className="admin-page">
             <header className="header">
@@ -142,7 +149,11 @@ const AdminPage = () => {
                 <nav className="nav-links">
                      <Link to="/admin">View Menu</Link>
                     <Link to="/admin/users">View Users</Link>
+                    <Link to="/admin/transaction">View Transactions</Link>
+                    <Link to="/admin/feedbacks">View Feedbacks</Link>
+                    <button onClick={handleLogout} className="logout-button">Log Out</button>
                 </nav>
+                
                 <div className="canteen">Admin Panel</div>
             </header>
             <div className="horizontal-line"></div>

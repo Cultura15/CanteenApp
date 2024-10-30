@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+
+//Entities
 import Register from './register';
 import Login from './login';
 import CanteenSelection from './Canteen/CanteenSelection';
 import Canteen1 from './Canteen/Canteen1'; 
 import Payment from './Payment/Payment';
 import Cart from './Cart';
-import Feedback from './Feedback';
+import Feedbacks from './Admin side/feedbacks';
+
+//Admin Page
 import AdminPage from './Admin side/admin';
 import Users from './Admin side/users';
+import Transaction from './Admin side/transaction';
+import Feedback from './Feedback';
 
 //Menu items imported
 import SunnySideupEgg from './Foods/SunnySudeupEgg'; 
@@ -62,6 +68,8 @@ const Frontend = () => {
 
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/admin/users" element={<Users />} />
+                <Route path="/admin/transaction" element={<Transaction />} />
+                <Route path="/admin/feedbacks" element={<Feedbacks />} />
 
 
                 

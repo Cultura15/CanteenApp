@@ -1,42 +1,79 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Feedback.css';
 
-
 const Feedback = () => {
+  const [cartId, setCartId] = useState(null);
   const [newFeedback, setNewFeedback] = useState({
     rating: '',
     comments: '',
     feedbackDate: new Date().toISOString(),
   });
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const generateAutoID = () => Math.floor(Math.random() * 10000).toString();
+
+  const userId = localStorage.getItem("user_id");
+
+  useEffect(() => {
+    const fetchCartId = async () => {
+      if (!userId || isNaN(userId)) {
+        console.error('Invalid user ID:', userId);
+        alert('Invalid user ID. Please log in again.');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await axios.get(`http://localhost:8080/api/cart/user/${userId}`);
+        setCartId(response.data.cartId);
+      } catch (error) {
+        console.error('Error fetching cart ID:', error);
+        alert('Could not fetch cart ID. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCartId();
+  }, [userId]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewFeedback({ ...newFeedback, [name]: value });
   };
+
   const handleCreateFeedback = async () => {
     if (!newFeedback.rating || !newFeedback.comments) {
       alert('Please fill all fields.');
       return;
     }
-    const feedbackWithIDs = {
+
+    const feedbackData = {
       ...newFeedback,
-      userID: generateAutoID(),
-      orderID: generateAutoID(),
-      cartID: generateAutoID(),
+      feedbackDate: new Date().toISOString(),
     };
+
     try {
-      await axios.post('http://localhost:8080/api/feedback/addfeedback', feedbackWithIDs);
+      await axios.post(`http://localhost:8080/api/feedback/${cartId}`, feedbackData);
       setNewFeedback({ rating: '', comments: '', feedbackDate: new Date().toISOString() });
+      
+      alert('Feedback submitted! Thank you for your input.');
+      console.log('Feedback submitted');
+
+      // Navigate to the /canteen1 route after successful feedback submission
+      navigate('/canteen1');
+      
     } catch (error) {
       console.error('Error creating feedback:', error);
+      alert('There was an error submitting your feedback. Please try again later.');
     }
   };
-  const handleNavigateToEditFeedback = () => {
-    navigate('/edit-feedback');
-  };
+
+  if (loading) {
+    return <div>Loading your feedback form...</div>;
+  }
+
   return (
     <div className="feedback-card">
       <h2 className="feedback-title">Feedback</h2>
@@ -68,11 +105,8 @@ const Feedback = () => {
       <button onClick={handleCreateFeedback} className="submit-button">
         <span className="submit-icon">🍔</span> Submit Feedback
       </button>
-      {/* Move the Edit Feedback button below the Submit Feedback button */}
-      <button onClick={handleNavigateToEditFeedback} className="submit-button edit-feedback-button">
-        Edit Feedback
-      </button>
     </div>
   );
 };
+
 export default Feedback;

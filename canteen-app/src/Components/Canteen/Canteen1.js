@@ -27,22 +27,25 @@ const Canteen1 = () => {
         navigate(route);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem("user_id"); // Remove user ID from local storage
+        navigate('/login'); // Redirect to login page
+    };
+
     const Header = () => {
         return (
             <>
                 <header className="header">
                     <div className="logo">LOGO</div>
                     <nav className="nav-links">
-                     <Link to="/canteen1/">Menu</Link>
+                        <Link to="/canteen1/">Menu</Link>
                         <Link to="/canteen1/cart">Cart</Link> 
                         <a href="#account">Account</a>
+                        <button onClick={handleLogout} className="logout-button">Log Out</button>
                     </nav>
                     <div className="canteen">Canteen 1</div>
                 </header>
-                <div className="horizontal-line"></div> {/* Add this line */}
-                {/* Add text below the horizontal line */}
-           
-             
+                <div className="horizontal-line"></div>
             </>
         );
     };

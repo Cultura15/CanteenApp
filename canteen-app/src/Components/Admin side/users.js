@@ -3,6 +3,7 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import './users.css';
 
 const Users = () => {
+    const navigate = useNavigate(); 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -92,6 +93,11 @@ const Users = () => {
         return <div>Error: {error}</div>;
     }
 
+    const handleLogout = () => {
+        localStorage.removeItem("user_id"); // Remove user ID from local storage
+        navigate('/login'); // Redirect to login page
+    };
+
     return (
         <div className="admin-page">
             <header className="header">
@@ -99,8 +105,11 @@ const Users = () => {
                 <nav className="nav-links">
                     <Link to="/admin">View Menu</Link>
                     <Link to="/admin/users">View Users</Link>
+                    <Link to="/admin/transaction">View Transactions</Link>
+                    <Link to="/admin/feedbacks">View Feedbacks</Link>
+                    <button onClick={handleLogout} className="logout-button">Log Out</button>
                 </nav>
-                <div className="canteen">User Management</div>
+                <div className="canteen">Admin Panel</div>
             </header>
             <div className="horizontal-line"></div>
 
