@@ -18,6 +18,16 @@ const Login = ({ onSuccess }) => {
 
     const submitLoginForm = async (event) => {
         event.preventDefault();
+
+        // Check if admin credentials are entered
+        if (loginData.email === 'admin@gmail.com' && loginData.password === '123') {
+            alert('Admin logged in successfully!');
+            // localStorage.setItem('user_id', '3'); 
+            onSuccess(); // Call onSuccess to update any relevant app state
+            navigate('/admin'); // Navigate to the admin page
+            return;
+        }
+
         try {
             const response = await axios.post('http://localhost:8080/api/users/login', loginData);
             

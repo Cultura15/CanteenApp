@@ -7,6 +7,8 @@ import Canteen1 from './Canteen/Canteen1';
 import Payment from './Payment/Payment';
 import Cart from './Cart';
 import Feedback from './Feedback';
+import AdminPage from './Admin side/admin';
+import Users from './Admin side/users';
 
 //Menu items imported
 import SunnySideupEgg from './Foods/SunnySudeupEgg'; 
@@ -47,6 +49,9 @@ const Frontend = () => {
                 <Route path="/canteen1" element={<Canteen1 />} />
                 <Route path="/canteen1/cart" element={<Cart />} />
                 <Route path="/feedback" element={<Feedback />} />
+
+
+                
                 <Route path="/canteen1/breakfast/sunny-side-up" element={<SunnySideupEgg />} /> {/* Ensure this route matches */}
                 <Route path="/canteen1/breakfast/hot-dog-bun" element={< HotdugBun />} />
                 <Route path="/canteen1/lunch/grilled-chicken" element={< GrilledChicken />} />
@@ -54,6 +59,11 @@ const Frontend = () => {
                 <Route path="/canteen1/snacks/sand-wich" element={< Sandwich />} />
                 <Route path="/canteen1/drinks/hot-coffee" element={< HotCoffee />} />
                 <Route path="/canteen1/dessert/ice-cream" element={< IceCream />} />
+
+                <Route path="/admin" element={<AdminPage />} />
+                <Route path="/admin/users" element={<Users />} />
+
+
                 
             </Routes>
         </Router>
