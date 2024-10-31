@@ -61,7 +61,7 @@ const Canteen1 = () => {
                     <nav className="nav-links">
                         <a href="#menu">Menu</a>
                         <Link to="/canteen1/cart">Cart</Link> {/* Link to Cart */}
-                        <a href="#account">Account</a>
+                        <Link to="/canteen1/account">Account</Link>
                     </nav>
                     <div className="canteen">Canteen 1</div>
                 </header>

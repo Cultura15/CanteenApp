@@ -1,68 +1,82 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Cart = () => {
     const navigate = useNavigate();
     const [cartItems, setCartItems] = useState([]);
-
-    const handleBack = () => {
-        navigate(-1);
-    };
+    const userId = localStorage.getItem('user_id');
 
     useEffect(() => {
-        const fetchCartItems = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/cart/get'); // Adjust this URL to your API
-                setCartItems(response.data); // Assuming response.data is an array of cart items
-            } catch (error) {
-                console.error('Error fetching cart items:', error);
-                alert("Failed to load cart items.");
-            }
-        };
+        axios.get(`http://localhost:8080/api/cart-items/user/${userId}`)
+            .then(response => {
+                setCartItems(response.data);
+            })
+            .catch(error => {
+                console.error("Error fetching cart items:", error);
+            });
+    }, [userId]);
 
-        fetchCartItems();
-    }, []);
-
-    const addItemToCart = (menuItem) => {
-        setCartItems(prevItems => {
-            const existingItem = prevItems.find(item => item.name === menuItem.name);
-            if (existingItem) {
-                return prevItems.map(item =>
-                    item.name === menuItem.name ? { ...item, quantity: item.quantity + 1 } : item
-                );
-            }
-            return [...prevItems, { ...menuItem, quantity: 1 }];
-        });
-    };
-
-    const updateQuantity = (index, newQuantity) => {
-        const updatedItems = [...cartItems];
-        updatedItems[index].quantity = newQuantity;
-        setCartItems(updatedItems);
-    };
-
-    const removeItem = (index) => {
-        setCartItems(prevItems => prevItems.filter((_, i) => i !== index));
-    };
-
+    // CALCULATE total price
     const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
+    // UPDATE function
+    const updateCartItem = (itemId, newQuantity) => {
+        axios.put(`http://localhost:8080/api/cart-items/${itemId}`, { quantity: newQuantity })
+            .then(response => {
+                console.log('Item quantity updated.');
+
+                // Update the cart items state with the updated item
+                setCartItems(cartItems.map(item => 
+                    item.cartItemId === itemId ? { ...item, quantity: response.data.quantity } : item
+                ));
+            })
+            .catch(error => {
+                console.error("Error updating cart item:", error);
+            });
+
+        alert('Quantity Updated.');
+    };
+
+    // DELETE function
+    const deleteCartItem = (itemId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this item?");
+        if (confirmDelete) {
+            axios.delete(`http://localhost:8080/api/cart-items/${itemId}`)
+                .then(response => {
+                    console.log(`Item is deleted.`);
+                    // Remove the deleted item from the cart items state
+                    setCartItems(cartItems.filter(item => item.cartItemId !== itemId));
+                })
+                .catch(error => {
+                    console.error("Error deleting cart item:", error);
+                });
+        }
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("user_id"); // Remove user ID from local storage
+        navigate('/login'); // Redirect to login page
+    };
+
 
     return (
         <div className="cart-page">
             <header className="header">
                 <div className="logo">LOGO</div>
                 <nav className="nav-links">
-                    <a href="#menu">Menu</a>
+                    <Link to="/canteen1/">Menu</Link>
                     <a href="#cart">Cart</a>
                     <a href="#account">Account</a>
+                    <button onClick={handleLogout} className="logout-button">Log Out</button>
                 </nav>
                 <div className="canteen">Canteen 1</div>
             </header>
+            <div className="horizontal-line"></div> 
 
             <div className="cart-content">
                 <div className="left-panel">
-                    <button className="back-button" onClick={handleBack}>
+                    <button className="back-button" onClick={() => navigate(-1)}>
                         &lt; Back to Menu
                     </button>
                     <div className="review-content">
@@ -73,35 +87,50 @@ const Cart = () => {
 
                 <div className="right-panel">
                     {cartItems.length === 0 ? (
-                        <p>Your cart is empty.</p>
+                        <>
+                            <p style={{ color: 'red' }}>Your cart is empty.</p>
+                        </>
                     ) : (
-                        cartItems.map((item, index) => (
-                            <div key={index} className="item-box">
+                        cartItems.map((item) => (
+                            <div key={item.cartItemId} className="item-box">
                                 <img src="/assets/egg.png" alt={item.name} />
                                 <div className="item-details">
-                                    <h3>{item.name}</h3>
-                                    <p>{item.calories} calories</p>
+                                    <h3>Category: {item.category}</h3>
+                                    <p>Name: {item.name}</p>
                                     <p>
                                         Quantity: 
-                                        <input
-                                            type="number"
-                                            min="1"
-                                            value={item.quantity}
-                                            onChange={(e) => updateQuantity(index, parseInt(e.target.value))}
+                                        <input 
+                                            type="number" 
+                                            value={item.quantity} 
+                                            min="1" 
+                                            onChange={(e) => {
+                                                const quantity = Math.max(1, parseInt(e.target.value) || 0); // Ensure quantity is at least 1
+                                                setCartItems(cartItems.map(cartItem =>
+                                                    cartItem.cartItemId === item.cartItemId ? { ...cartItem, quantity } : cartItem
+                                                ));
+                                            }}
                                         />
                                     </p>
-                                    <button onClick={() => removeItem(index)}>Remove</button>
+                                    <p>Price: ₱{(item.price * item.quantity).toFixed(2)}</p>
+                                    <button onClick={() => updateCartItem(item.cartItemId, item.quantity)}>Update</button>
                                 </div>
+                                
+                                <button className='buttons' onClick={() => deleteCartItem(item.cartItemId)}>Remove</button>
                             </div>
                         ))
                     )}
 
                     <div className="order-summary">
                         <p>Total - ₱{totalPrice.toFixed(2)}</p>
-                        {/* Change this button to provide an actual menu item to add */}
-                        <button onClick={() => addItemToCart({ name: "Sunny Sideup Egg", price: 15, calories: 97 })}>Add Sunny Sideup Egg</button>
                     </div>
-                    <button className="continue-button">Continue</button>
+                    <Link to="/payment">
+                        <button 
+                            className="continue-button" 
+                            disabled={cartItems.length === 0} // Disable button if cart is empty
+                        >
+                            Continue
+                        </button>
+                    </Link>
                 </div>
             </div>
 
@@ -118,14 +147,17 @@ const Cart = () => {
 
                 .header {
                     display: flex;
-                    align-items: center;
-                    padding: 10px 20px;
+                    align-items: center; /* Vertically center the content */
+                    padding: 10px;
                     background-color: #e4dede;
-                    position: fixed;
-                    width: 100%;
+                    color: black;
+                    position: fixed; /* Fix it at the top */
                     top: 0;
-                    z-index: 1000;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    left: 0;
+                    width: 100%;
+                    height: 80px; /* Set a consistent height */
+                    z-index: 1000; /* Ensure it stays on top of other elements */
+                    
                 }
 
                 .cart-content {
@@ -133,33 +165,40 @@ const Cart = () => {
                     flex: 1;
                     margin-top: 80px;
                     width: 100vw;
-                    height: calc(100vh - 80px); /* Adjust for header height */
+                    height: calc(100vh - 80px);
                 }
 
                 .logo {
+                    font-size: 24px;
                     font-weight: bold;
-                    font-size: 20px;
+                    margin-right: 20px; /* Space between logo and nav links */
                 }
 
-                .nav-links {
+              .nav-links {
                     display: flex;
-                    margin-left: 20px;
-                    gap: 20px;
+                    gap: 20px; /* Space between the links */
                 }
 
                 .nav-links a {
-                    text-decoration: none;
                     color: black;
-                    font-weight: 500;
+                    text-decoration: none;
+                    font-size: 18px;
+                }
+
+                .nav-links a:hover {
+                    text-decoration: underline;
                 }
 
                 .canteen {
-                    margin-left: auto;
-                    background-color: #f9a72e;
-                    padding: 8px 12px;
-                    border-radius: 5px;
-                    font-weight: bold;
-                }
+                margin-left: auto; /* Pushes canteen text to the far right */
+                color: black;
+                background-color: #f9a72e; /* Background color */
+                padding: 10px 20px; /* Optional: Padding for spacing */
+                border-radius: 5px; /* Optional: Rounded corners */
+                display: flex; /* Use flex to center the text */
+                align-items: center; /* Center vertically */
+                height: 100%; /* Fill the height of the header */
+            }
 
                 .left-panel {
                     width: 35%;
@@ -168,7 +207,7 @@ const Cart = () => {
                     color: white;
                     display: flex;
                     flex-direction: column;
-                    align-items: flex-start; /* Ensure items are aligned to the start (left) */
+                    align-items: flex-start;
                     height: 100%;
                     box-sizing: border-box;
                 }
@@ -179,9 +218,7 @@ const Cart = () => {
                     color: black;
                     cursor: pointer;
                     font-size: 16px;
-                    margin-bottom: 30px; /* Space below the button */
-                    align-self: flex-start; /* This keeps the button to the left */
-                    margin-left: 0; /* Ensure it's flush against the left edge */
+                    margin-bottom: 30px;
                 }
 
                 .review-content {
@@ -202,7 +239,7 @@ const Cart = () => {
                     flex-direction: column;
                     align-items: center;
                     gap: 20px;
-                    height: 100%; /* Full height */
+                    height: 100%;
                     overflow-y: auto;
                     box-sizing: border-box;
                 }
@@ -233,28 +270,31 @@ const Cart = () => {
                     font-size: 16px;
                 }
 
-                .order-summary hr {
-                    margin: 10px 0;
-                }
-
                 .continue-button {
-                    padding: 15px 40px; /* Adjust for a smaller button */
+                    width: 300px;
                     background-color: #545454;
                     color: white;
-                    border: none;
-                    border-radius: 25px; /* Smaller rounded corners */
+                    border-radius: 25px;
                     cursor: pointer;
-                    position: fixed; /* Fixed position relative to the viewport */
-                    bottom: 30px; /* Distance from the bottom of the viewport */
-                    right: 50px; /* Distance from the right of the viewport */
-                    font-size: 14px; /* Adjust font size */
-                    width: auto; /* Ensure button width doesn't expand */
-                    display: inline-block; /* Keeps button size to its content */
+                    position: fixed;
+                    bottom: 30px;
+                    right: 50px;
+                    font-size: 14px;
                 }
 
                 .continue-button:hover {
                     background-color: #4c4c4c;
                 }
+
+                .buttons{
+                width: 100px;
+                font-size: 20px;
+                position:fixed;
+                right: 1px;
+                
+                }
+
+
             `}</style>
         </div>
     );

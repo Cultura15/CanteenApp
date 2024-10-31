@@ -60,9 +60,15 @@ import BananaSmoothie from './Foods/BananaSmoothie';
 import LemonJuice from './Foods/LemonJuice';
 import Cart from './Cart';
 import Cart2 from './Cart2';
-import AdminPage from './AdminPage';
-import Users from './Users';
 
+import Feedbacks from './Admin side/feedbacks';
+
+//Admin Page
+import AdminPage from './Admin side/admin';
+import Users from './Admin side/users';
+import Transaction from './Admin side/transaction';
+import Feedback from './Feedback';
+import Account from './Account';
 const Frontend = () => {
     const [step, setStep] = useState('register');
     const [selectedCanteen, setSelectedCanteen] = useState(null);
@@ -93,6 +99,7 @@ const Frontend = () => {
                 <Route path="/canteen2" element={<Canteen2 />} />
                 <Route path="/canteen3" element={<Canteen3 />} />
                 <Route path="/canteen1/cart" element={<Cart />} />
+                <Route path="/canteen1/account" element={<Account />} />
                 <Route path="/canteen1/breakfast/sunny-side-up" element={<SunnySideupEgg />} /> {/* Ensure this route matches */}
                 <Route path="/canteen1/breakfast/hot-dog-bun" element={< HotdugBun />} />
                 <Route path="/canteen1/breakfast/bacon" element={< Bacon />} />
@@ -189,6 +196,8 @@ const Frontend = () => {
 
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/admin/users" element={<Users />} />
+                <Route path="/admin/transaction" element={<Transaction />} />
+                <Route path="/admin/feedbacks" element={<Feedbacks />} />
 
             </Routes>
         </Router>
