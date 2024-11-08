@@ -1,4 +1,5 @@
 /* src/PaymentMethod.css */
+
 .container {
   max-width: 450px;
   margin: 20px auto;
@@ -73,41 +74,39 @@ h3 {
 
 .summaryTitle {
   font-size: 1.5rem;
-  margin-bottom: 50px;
+  margin-bottom: 20px; /* Adjusted margin for better spacing */
 }
 
 .summaryRow {
   display: flex;
-  justify-content: space-between; /* Keeps content justified */
+  justify-content: space-between;
   margin-bottom: 8px;
-  align-items: center; /* Aligns items vertically centered */
+  align-items: center;
 }
 
 .summaryRow strong {
-  min-width: 150px; /* Increase min-width for better spacing */
-  text-align: left; /* Aligns the label to the left */
+  min-width: 150px;
+  text-align: left;
 }
 
 .summaryRow span {
-  flex-grow: 1; /* Allows the span to grow and fill space */
-  text-align: right; /* Aligns the value to the right */
+  flex-grow: 1;
+  text-align: right;
 }
-
 
 .submitButton {
   display: block;
-  width: 200px; /* Increase width to make it larger */
-  padding: 15px; /* Increase padding for a bigger button */
+  width: 200px;
+  padding: 15px;
   background-color: #ff6600;
   color: white;
   border: none;
-  border-radius: 8px; /* Slightly larger border radius for a rounded look */
+  border-radius: 8px;
   font-weight: bold;
-  font-size: 15px; /* Increase font size */
+  font-size: 15px;
   cursor: pointer;
-  margin: 20px auto 0; /* Adds spacing at the top and centers it */
+  margin: 20px auto 0;
 }
-
 
 .submitButton:hover {
   background-color: #e55a00;
@@ -115,19 +114,84 @@ h3 {
 
 .message {
   margin-top: 20px;
-  color: green;
-  font-weight: bold;
   text-align: center;
+  color: #d9534f; /* Bootstrap danger color */
 }
 
-.cardIcons {
+.listButton {
+  display: block;
+  width: 200px;
+  padding: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 10px auto; /* Space between buttons */
+}
+
+.listButton:hover {
+  background-color: #0056b3;
+}
+
+.paymentsList {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.paymentsList h4 {
+  margin-bottom: 10px; /* Spacing for the list title */
+}
+
+ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+.paymentItem {
   display: flex;
-  margin-left: 280px;
-  margin-top: 10px; /* Space from the payment method label */
-  padding: 10px; /* Add some padding for better visuals */
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
-.cardIcon {
-  width: 40px; /* Adjust size as needed */
-  height: auto; /* Maintain aspect ratio */
+.paymentActions {
+  display: flex;
+  gap: 10px;
+}
+
+.editButton,
+.deleteButton {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+}
+
+.editButton {
+  background-color: #ffb300; /* Yellow */
+}
+
+.deleteButton {
+  background-color: #dc3545; /* Red */
+}
+
+.editButton:hover {
+  background-color: #e0a800;
+}
+
+.deleteButton:hover {
+  background-color: #c82333;
+}
+
+button {
+  width: 100%; /* Buttons take full width */
+  margin-top: 10px; /* Space between actions */
 }

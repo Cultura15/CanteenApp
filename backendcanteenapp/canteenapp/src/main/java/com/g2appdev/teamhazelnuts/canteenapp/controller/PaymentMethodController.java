@@ -27,7 +27,7 @@ public class PaymentMethodController {
 
     
     // Create (POST)
-    @PostMapping("/add")
+    @PostMapping("/addp")
     public PaymentMethod addPaymentMethod(@RequestBody PaymentMethod paymentMethod) {
         return paymentMethodService.addPaymentMethod(paymentMethod);
     }
