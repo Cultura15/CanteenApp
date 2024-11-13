@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class CartItemService {
@@ -26,7 +27,7 @@ public class CartItemService {
     
     //Method to create a cartItem
     public CartItemEntity createCartItem(CartItemEntity cartItem) {
-        // Check if menuItem is correctly set
+       
         if (cartItem.getMenuItem() == null || cartItem.getMenuItem().getMenuItemID() == 0) {
             throw new IllegalArgumentException("Menu item must not be null and must have a valid ID");
         }
@@ -34,24 +35,22 @@ public class CartItemService {
         int menuId = cartItem.getMenuItem().getMenuItemID();
         System.out.println("Attempting to find MenuItem with ID: " + menuId);
 
-        // Verify that the MenuEntity exists in the database
+        
         if (!menuRepository.existsById(menuId)) {
             throw new NoSuchElementException("Menu item with ID " + menuId + " does not exist in the database.");
         }
-
-        // If the MenuEntity exists, retrieve it
+ 
         MenuEntity menuEntity = menuRepository.findById(cartItem.getMenuItem().getMenuItemID())
         	    .orElseThrow(() -> new NoSuchElementException("Menu item not found"));
 
-
-        // Set the retrieved MenuEntity back into the CartItemEntity
         cartItem.setMenuItem(menuEntity);
 
-        // Save and return the CartItemEntity
+      
         return cartItemRepository.save(cartItem);
     }
 
 
+    
     //Method to GET all cart items
     public List<CartItemEntity> getAllCartItems() {
         return cartItemRepository.findAll();
@@ -67,18 +66,50 @@ public class CartItemService {
         return cartItemRepository.findById(cartItemId).orElse(null);
     }
     
- // Method to UPDATE a cart item
-    public CartItemEntity updateCartItem(int cartItemId, CartItemEntity updatedCartItem) {
-        CartItemEntity existingCartItem = cartItemRepository.findById(cartItemId)
-            .orElseThrow(() -> new RuntimeException("Cart item not found"));
+    public Optional<CartItemEntity> getCartItemByIdinOrder(int cartItemId) {
+        return cartItemRepository.findById(cartItemId);
+    }
+    
+    public List<CartItemEntity> getCartItemsByStatusAndCartId(int cartId, String status) {
+        if (status != null) {
+            return cartItemRepository.findByCart_CartIdAndStatus(cartId, status);
+        } else {
+            return cartItemRepository.findByCart_CartId(cartId); // Return all if status is null
+        }
+    }
 
-        existingCartItem.setQuantity(updatedCartItem.getQuantity());
-        
-        // Update menu item if necessary
-        if (updatedCartItem.getMenuItem() != null) {
-            existingCartItem.setMenuItem(updatedCartItem.getMenuItem());
+    
+    
+ // Method to UPDATE a cart item
+//    public CartItemEntity updateCartItem(int cartItemId, CartItemEntity updatedCartItem) {
+//        CartItemEntity existingCartItem = cartItemRepository.findById(cartItemId)
+//            .orElseThrow(() -> new RuntimeException("Cart item not found"));
+//
+//        existingCartItem.setQuantity(updatedCartItem.getQuantity());
+//        
+//        if (updatedCartItem.getMenuItem() != null) {
+//            existingCartItem.setMenuItem(updatedCartItem.getMenuItem());
+//        }
+//
+//        return cartItemRepository.save(existingCartItem);
+//    }
+    
+    public CartItemEntity updateCartItem(int cartItemId, CartItemEntity updatedCartItem) {
+        // Retrieve the existing cart item from the database
+        CartItemEntity existingCartItem = cartItemRepository.findById(cartItemId)
+                .orElseThrow(() -> new NoSuchElementException("Cart item not found"));
+
+        // Update the status field if it's provided
+        if (updatedCartItem.getStatus() != null) {
+            existingCartItem.setStatus(updatedCartItem.getStatus());
         }
 
+        // Optionally update other fields, such as quantity or price
+        if (updatedCartItem.getQuantity() > 0) {
+            existingCartItem.setQuantity(updatedCartItem.getQuantity());
+        }
+
+        // Save the updated cart item
         return cartItemRepository.save(existingCartItem);
     }
 
@@ -91,13 +122,5 @@ public class CartItemService {
     
  
 
-<<<<<<< HEAD
-    public void updateCart(CartEntity cart) {
-        cartRepository.save(cart);
-    }
-
-=======
  
->>>>>>> add469f (fourth commit)
 }
-

@@ -7,6 +7,7 @@ public class CartItemDTO {
     private double price;
     private String category;
     private int menuItemId; 
+    private String status;
 
     // Getter for cartItemId
     public int getCartItemId() {
@@ -65,6 +66,15 @@ public class CartItemDTO {
     // Setter for menuItemId
     public void setMenuItemId(int menuItemId) {
         this.menuItemId = menuItemId;
+    }
+    
+    public String getStatus() {
+        return status;
+    }
+
+    // Setter for menuItemId
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

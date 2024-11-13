@@ -24,8 +24,14 @@ public class RegisterEntity {
 
     private String fname;
     private String lname;
-    private String email;
     private String password;
+    
+    @Column(nullable = false, unique = true)
+    private String email;
+
+
+    @Column(nullable = false)
+    private String status = "active";
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user",
     		cascade = CascadeType.ALL)
@@ -33,7 +39,9 @@ public class RegisterEntity {
     
     @OneToMany(mappedBy = "user", 
     		cascade = CascadeType.ALL)
-    private List<CartEntity> carts; 
+    private List<CartEntity> carts;
+    
+    
 
     
     
@@ -41,11 +49,12 @@ public RegisterEntity() {}
 
 
     
-    public RegisterEntity(String userId, String fname, String lname, String email, String password) {
+    public RegisterEntity(String userId, String fname, String lname, String email, String password, String status) {
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.password = password;
+        this.status = status;
         }
     
 
@@ -89,6 +98,15 @@ public RegisterEntity() {}
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 
 }
 

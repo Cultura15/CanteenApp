@@ -23,7 +23,8 @@ public class CartEntity {
     
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<CartItemEntity> cartItems = new ArrayList<>();
-
+    
+    
     public CartEntity() {}
 
     public CartEntity(double totalAmount, RegisterEntity user) {
@@ -35,9 +36,7 @@ public class CartEntity {
         this.cartId = cartId;
     }
     
-    
-
-    //Getters Setters
+    // Getters and Setters
     public int getCartId() {
         return cartId;
     }
@@ -66,5 +65,5 @@ public class CartEntity {
         this.cartItems = cartItems;
     }
 
+   
 }
-

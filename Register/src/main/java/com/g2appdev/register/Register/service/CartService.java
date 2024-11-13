@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class CartService {
@@ -57,6 +58,12 @@ public class CartService {
         return cartRepository.findByUser_UserId(userId);
     }
     
+    //Method to GET a cart by CartID
+    public CartEntity getCartById(int cartId) {
+        return cartRepository.findById(cartId)
+                .orElseThrow(() -> new NoSuchElementException("Cart not found with ID: " + cartId));
+    }
+    
     // Method to UPDATE a cart
     public CartEntity updateCart(int id, CartEntity updatedCart) {
         CartEntity existingCart = cartRepository.findById(id)
@@ -76,28 +83,7 @@ public class CartService {
         }
         cartRepository.deleteById(cartId);
     }
-<<<<<<< HEAD
+    
 
-=======
-    
-//    public CartItemDTO convertToDTO(CartItemEntity cartItemEntity) {
-//        MenuItemDTO menuItemDTO = null;
-//        
-//        if (cartItemEntity.getMenuItem() != null) {
-//            menuItemDTO = new MenuItemDTO(); // Initialize and set properties
-//            menuItemDTO.setMenuItemID(cartItemEntity.getMenuItem().getMenuItemID());
-//            menuItemDTO.setName(cartItemEntity.getMenuItem().getName());
-//            // Set other fields as necessary
-//        }
-//
-//        return new CartItemDTO(
-//            cartItemEntity.getCartItemId(),
-//            cartItemEntity.getName(),
-//            cartItemEntity.getPrice(),
-//            cartItemEntity.getQuantity(),
-//            menuItemDTO
-//        );
-//    }
-    
->>>>>>> add469f (fourth commit)
+
 }

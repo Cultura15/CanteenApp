@@ -66,8 +66,4 @@ public class MenuService {
         menuItem.setImage(newMenuItemDetails.getImage());
         menuItem.setCategory(newMenuItemDetails.getCategory());
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> add469f (fourth commit)

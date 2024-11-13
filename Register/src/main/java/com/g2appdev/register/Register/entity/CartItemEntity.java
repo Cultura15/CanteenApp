@@ -1,5 +1,6 @@
 package com.g2appdev.register.Register.entity;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -34,16 +35,23 @@ public class CartItemEntity {
     
     @Column(name = "category", nullable = false)
     private String category;
+    
+
+    @Column(nullable = false)
+    private String status = "active";
+    
+
 
     public CartItemEntity() {}
 
-    public CartItemEntity(CartEntity cart, MenuEntity menuItem, int quantity, double price, String name, String category) {
+    public CartItemEntity(CartEntity cart, MenuEntity menuItem, int quantity, double price, String name, String category, String status) {
         this.cart = cart;
         this.menuItem = menuItem;
         this.quantity = quantity;
         this.price = price;
         this.name= name;
         this.category = category;
+        this.status = status;
         
     }
     
@@ -84,9 +92,6 @@ public class CartItemEntity {
     public void setPrice(double price) {
         this.price = price;
     }
-<<<<<<< HEAD
-
-=======
     
     public String getName() {
         return name;
@@ -103,5 +108,12 @@ public class CartItemEntity {
     public void setCategory(String category) {
         this.category = category;
     }
->>>>>>> add469f (fourth commit)
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

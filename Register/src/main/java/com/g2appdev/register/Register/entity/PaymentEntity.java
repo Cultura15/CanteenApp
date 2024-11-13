@@ -12,7 +12,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 
@@ -38,6 +37,10 @@ public class PaymentEntity {
     @JoinColumn(name = "cart_id")
     @JsonIgnore
     private CartEntity cart;
+    
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private RegisterEntity user;
 
     public PaymentEntity() {}
     

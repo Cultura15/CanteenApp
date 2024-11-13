@@ -32,7 +32,6 @@ public class PaymentService {
     }
 
     
-    
     //NOT SURE WHAT IS THIS HAHA
     public PaymentDTO processPayment(int userId, PaymentDTO paymentRequest) {
        
@@ -80,6 +79,29 @@ public class PaymentService {
                 .orElseThrow(() -> new RuntimeException("Payment not found"));
     }
     
+    //GET payment by userId
+    public List<PaymentEntity> getPaymentsByUserId(int userId) {
+        CartEntity cart = cartRepository.findByUser_UserId(userId);
+        if (cart == null) {
+            throw new RuntimeException("Cart not found for user ID: " + userId);
+        }
+
+        return paymentRepository.findByCart(cart); 
+    }
+
+    
+ // Add this method in PaymentService
+//    public PaymentEntity getPaymentByUserId(int userId) {
+//        CartEntity cart = cartRepository.findByUser_UserId(userId); 
+//        if (cart == null) {
+//            throw new RuntimeException("Cart not found for user ID: " + userId);
+//        }
+//        
+//        return paymentRepository.findByCart(cart) 
+//                .orElseThrow(() -> new RuntimeException("No payment found for cart associated with user ID: " + userId));
+//    }
+
+    
     
     // UPDATE payment
     public PaymentEntity updatePayment(int id, PaymentEntity updatedPayment) {
@@ -101,5 +123,9 @@ public class PaymentService {
             throw new RuntimeException("Payment not found");
         }
         paymentRepository.deleteById(id);
+    }
+    
+    public PaymentEntity findById(int paymentId) {
+        return paymentRepository.findById(paymentId).orElse(null); // Returns null if not found
     }
 }
