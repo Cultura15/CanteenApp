@@ -111,6 +111,7 @@ const Feedbacks = () => {
                     <Link to="/admin/users">View Users</Link>
                     <Link to="/admin/transaction">View Transactions</Link>
                     <Link to="/admin/feedbacks">View Feedbacks</Link>
+                    <Link to="/admin/orders">View Orders</Link>
                     <button onClick={handleLogout} className="logout-button">Log Out</button>
                 </nav>
                 <div className="canteen">Admin Panel</div>
@@ -133,7 +134,7 @@ const Feedbacks = () => {
                                     </span>
                                     <div className="button-group">
                                         <button onClick={() => handleEdit(feedback)}>Edit</button>
-                                        <button onClick={() => handleDelete(feedback.feedbackID)}>Delete</button>
+                                        <button className="delete-button" onClick={() => handleDelete(feedback.feedbackID)}>Delete</button>
                                     </div>
                                 </li>
                             ))}

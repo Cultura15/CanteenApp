@@ -136,3 +136,24 @@ textarea {
     margin: 5px 0 15px;  /* Adjust margin as needed */
     font-size: 16px;     /* Increase font size */
 }
+
+.red-button {
+    background-color: #ff4d4d; /* Red color for delete button */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.red-button:hover {
+    background-color: #e60000; /* Darker red on hover */
+}
+
+.warning-text {
+    color: #e60000; /* Warning text color */
+    font-size: 0.9rem;
+    margin-left: 8px;
+    font-weight: bold;
+}

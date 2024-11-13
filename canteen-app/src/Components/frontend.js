@@ -15,6 +15,7 @@ import AdminPage from './Admin side/admin';
 import Users from './Admin side/users';
 import Transaction from './Admin side/transaction';
 import Feedback from './Feedback';
+import Orders from './Admin side/orders';
 
 //Menu items imported
 import SunnySideupEgg from './Foods/SunnySudeupEgg'; 
@@ -24,6 +25,10 @@ import Sandwich from './Foods/Sandwhich';
 import Spaghetti from './Foods/Spaghetti';
 import HotCoffee from './Foods/HotCoffee';
 import IceCream from './Foods/IceCream';
+
+//TRIAL
+
+
 
 
 
@@ -69,7 +74,9 @@ const Frontend = () => {
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="/admin/users" element={<Users />} />
                 <Route path="/admin/transaction" element={<Transaction />} />
-                <Route path="/admin/feedbacks" element={<Feedbacks />} />
+                <Route path="/admin/feedbacks" element={<Feedbacks />} />\
+                <Route path="/admin/orders" element={<Orders />} />
+          
 
 
                 

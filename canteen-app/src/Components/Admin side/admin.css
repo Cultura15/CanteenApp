@@ -116,3 +116,21 @@ select {
     margin: 5px 0 15px;  /* Adjust margin as needed */
     font-size: 16px;     /* Increase font size */
 }
+
+.button-group .edit-button {
+    background-color: #4CAF50; /* Green for Edit */
+}
+
+.button-group .edit-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.button-group .delete-button {
+    background-color: #f44336; /* Red for Delete */
+}
+
+.button-group .delete-button:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+}
+
+

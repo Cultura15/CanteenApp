@@ -114,20 +114,24 @@ const AdminPage = () => {
     };
 
     const handleDeleteItem = async (itemId) => {
-        console.log("Deleting item with ID:", itemId); // Log item ID being deleted
-        try {
-            const response = await fetch(`http://localhost:8080/api/menu/delete/${itemId}`, {
-                method: 'DELETE',
-            });
-
-            if (response.ok) {
-                setMenuItems(menuItems.filter(item => item.menuItemID !== itemId));
-                console.log("Deleted item with ID:", itemId); // Log deleted item ID
-            } else {
-                console.error("Failed to delete item:", response.statusText);
+        if (window.confirm("Are you sure you want to delete this record?")) {
+            console.log("Deleting item with ID:", itemId); // Log item ID being deleted
+            try {
+                const response = await fetch(`http://localhost:8080/api/menu/delete/${itemId}`, {
+                    method: 'DELETE',
+                });
+    
+                if (response.ok) {
+                    setMenuItems(menuItems.filter(item => item.menuItemID !== itemId));
+                    console.log("Deleted item with ID:", itemId); // Log deleted item ID
+                } else {
+                    console.error("Failed to delete item:", response.statusText);
+                }
+            } catch (error) {
+                console.error("Error deleting menu item:", error);
             }
-        } catch (error) {
-            console.error("Error deleting menu item:", error);
+        } else {
+            console.log("Delete action canceled");
         }
     };
 
@@ -151,6 +155,9 @@ const AdminPage = () => {
                     <Link to="/admin/users">View Users</Link>
                     <Link to="/admin/transaction">View Transactions</Link>
                     <Link to="/admin/feedbacks">View Feedbacks</Link>
+                    <Link to="/admin/orders">View Orders</Link>
+              
+                    
                     <button onClick={handleLogout} className="logout-button">Log Out</button>
                 </nav>
                 
@@ -221,8 +228,8 @@ const AdminPage = () => {
                                         <p>{item.description}</p>
                                         {item.image && <img src={item.image} alt={item.name} style={{ maxWidth: '100px', display: 'block' }} />}
                                         <div className="button-group">
-                                            <button onClick={() => handleEditItem(item)}>Edit</button>
-                                            <button onClick={() => handleDeleteItem(item.menuItemID)}>Delete</button>
+                                            <button className="edit-button" onClick={() => handleEditItem(item)}>Edit</button>
+                                            <button className="delete-button" onClick={() => handleDeleteItem(item.menuItemID)}>Delete</button>
                                         </div>
                                     </li>
                                 ))}

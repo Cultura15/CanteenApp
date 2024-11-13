@@ -8,13 +8,14 @@ const Cart = () => {
     const userId = localStorage.getItem('user_id');
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/api/cart-items/user/${userId}`)
-            .then(response => {
-                setCartItems(response.data);
-            })
-            .catch(error => {
-                console.error("Error fetching cart items:", error);
-            });
+        axios.get(`http://localhost:8080/api/cart-items/user/${userId}?status=active`)
+        .then(response => {
+            setCartItems(response.data); // Only active items will be returned
+        })
+        .catch(error => {
+            console.error("Error fetching cart items:", error);
+        });
+    
     }, [userId]);
 
     // CALCULATE total price
@@ -39,17 +40,33 @@ const Cart = () => {
     };
 
     // DELETE function
-    const deleteCartItem = (itemId) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this item?");
-        if (confirmDelete) {
-            axios.delete(`http://localhost:8080/api/cart-items/${itemId}`)
+    // const deleteCartItem = (itemId) => {
+    //     const confirmDelete = window.confirm("Are you sure you want to delete this item?");
+    //     if (confirmDelete) {
+    //         axios.delete(`http://localhost:8080/api/cart-items/${itemId}`)
+    //             .then(response => {
+    //                 console.log(`Item is deleted.`);
+    //                 // Remove the deleted item from the cart items state
+    //                 setCartItems(cartItems.filter(item => item.cartItemId !== itemId));
+    //             })
+    //             .catch(error => {
+    //                 console.error("Error deleting cart item:", error);
+    //             });
+    //     }
+    // };
+
+    const inactivateCartItem = (itemId) => {
+        const confirmInactivate = window.confirm("Are you sure you want to remove this item?");
+        if (confirmInactivate) {
+            axios.put(`http://localhost:8080/api/cart-items/${itemId}`, { status: "inactive" })
                 .then(response => {
-                    console.log(`Item is deleted.`);
-                    // Remove the deleted item from the cart items state
+                    console.log('Item is now inactive.');
+
+                    // Filter out the inactivated item from the state
                     setCartItems(cartItems.filter(item => item.cartItemId !== itemId));
                 })
                 .catch(error => {
-                    console.error("Error deleting cart item:", error);
+                    console.error("Error inactivating cart item:", error);
                 });
         }
     };
@@ -115,7 +132,7 @@ const Cart = () => {
                                     <button onClick={() => updateCartItem(item.cartItemId, item.quantity)}>Update</button>
                                 </div>
                                 
-                                <button className='buttons' onClick={() => deleteCartItem(item.cartItemId)}>Remove</button>
+                                <button className='buttons' onClick={() => inactivateCartItem(item.cartItemId)}>Remove</button>
                             </div>
                         ))
                     )}

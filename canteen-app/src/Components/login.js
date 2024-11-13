@@ -8,49 +8,46 @@ const Login = ({ onSuccess }) => {
         email: '',
         password: ''
     });
-    
-    const navigate = useNavigate(); // Initialize useNavigate
+    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const handleLoginChange = (event) => {
         const { id, value } = event.target;
         setLoginData({ ...loginData, [id]: value });
     };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     const submitLoginForm = async (event) => {
         event.preventDefault();
 
-        // Check if admin credentials are entered
         if (loginData.email === 'admin@gmail.com' && loginData.password === '123') {
             alert('Admin logged in successfully!');
-            // localStorage.setItem('user_id', '3'); 
-            onSuccess(); // Call onSuccess to update any relevant app state
-            navigate('/admin'); // Navigate to the admin page
+            localStorage.setItem('user_id', '11'); 
+            onSuccess();
+            navigate('/admin');
             return;
         }
 
         try {
             const response = await axios.post('http://localhost:8080/api/users/login', loginData);
-            
-            // Log the entire response to check the structure
             console.log('Login Response:', response.data);
     
-            // Assuming the response.data contains the user object with user_id
-            if (response.data && response.data.userId) { // Ensure userId matches your backend
+            if (response.data && response.data.userId) {
                 alert('User logged in successfully!');
-                localStorage.setItem('user_id', response.data.userId); // Store the user ID
-                
-                // Call the onSuccess prop to indicate a successful login
+                localStorage.setItem('user_id', response.data.userId);
                 onSuccess();
-                navigate('/canteenSelection'); // Navigate to the canteen selection page
+                navigate('/canteenSelection');
             } else {
-                alert('Login failed: User ID not found in response.'); // Handle case where user_id is not returned
+                alert('Login failed: User ID not found in response.');
             }
         } catch (error) {
             console.error('Login Error:', error);
             alert('Failed to log in.');
         }
     };
-    
 
     return (
         <div className="form-container">
@@ -66,15 +63,32 @@ const Login = ({ onSuccess }) => {
                         required
                     />
                 </div>
-                <div>
+                <div className="password-field">
                     <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={loginData.password}
-                        onChange={handleLoginChange}
-                        required
-                    />
+                    <div style={{ position: 'relative', width: '100%' }}>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            value={loginData.password}
+                            onChange={handleLoginChange}
+                            required
+                            style={{ paddingRight: '30px' }} // Extra space for the icon
+                        />
+                        <img
+                            src={showPassword ? '/assets/open.png' : '/assets/close.png'}
+                            alt={showPassword ? 'Hide password' : 'Show password'}
+                            className="password-toggle-icon"
+                            onClick={togglePasswordVisibility}
+                            style={{
+                                position: 'absolute',
+                                right: '10px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                cursor: 'pointer',
+                                width: '20px'
+                            }}
+                        />
+                    </div>
                 </div>
                 <div>
                     <button type="submit">Login</button>

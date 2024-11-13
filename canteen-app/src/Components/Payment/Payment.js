@@ -68,6 +68,28 @@ const Payment = () => {
     }
   };
 
+  // Function to post order items after payment
+  const postOrderItems = async () => {
+    const userId = localStorage.getItem("user_id"); // Get user ID from localStorage
+  
+    for (const item of orderSummary.items) {
+      try {
+        const response = await axios.post(`http://localhost:8080/api/order-items/user/${userId}?cartItemId=${item.id}`, {
+          // You can also pass additional data if needed
+        });
+  
+        if (response.status === 201) {
+          console.log("Order item posted successfully:", response.data);
+        } else {
+          console.error("Failed to post order item.");
+        }
+      } catch (error) {
+        console.error("Error posting order item:", error);
+      }
+    }
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!cartId) {
@@ -86,6 +108,10 @@ const Payment = () => {
       if (response.status === 201) {
         alert("Payment created successfully!");
         setIsPaymentSuccessful(true); // Set payment success state
+        
+        // Post order items after payment is successful
+        await postOrderItems();
+
         await deleteCartItems(); // Clear cart after successful payment
         navigate('/feedback'); // Navigate to feedback page
       } else {
