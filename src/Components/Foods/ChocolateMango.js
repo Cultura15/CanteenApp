@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
-const SunnySideupEgg = () => {
+const ChocolateMango = () => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1); // State to track quantity
     const [menuItem, setMenuItem] = useState(null);
@@ -17,7 +17,7 @@ const SunnySideupEgg = () => {
                 const response = await axios.get('http://localhost:8080/api/menu/get'); // Adjust this if necessary
                 console.log('Response data:', response.data); // Log the entire response data
                 
-                const eggItem = response.data.find(item => item.name === "SunnySideUp Egg"); // Replace with your actual condition
+                const eggItem = response.data.find(item => item.name === "Chocolate Cake"); // Replace with your actual condition
                 
                 if (eggItem) {
                     console.log('Sunny Sideup Egg item:', eggItem); // Log the found item
@@ -51,12 +51,12 @@ const SunnySideupEgg = () => {
                         <Link to="/canteen1/cart">Cart</Link> {/* Link to Cart */}
                         <a href="#account">Account</a>
                     </nav>
-                    <div className="canteen">Canteen</div>
+                    <div className="canteen">Canteen 1</div>
                 </header>
                 <div className="horizontal-line"></div> {/* Add this line */}
                 {/* Add text below the horizontal line */}
             <div className="food-path">
-                / Breakfast / Sunny Sideup            
+                / Dessert / Chocolate Mango           
             </div>
             
             <div className = "back-button-container">
@@ -75,22 +75,22 @@ const SunnySideupEgg = () => {
             {/* Full width container with specific height */}
             <div className="food-detail-container">
                 <div className="image-container">
-                    <img src="/assets/eggs.png" alt="Sunny Sideup Egg" />
+                    <img src="/assets/chocolatemango.png" alt="Chocolate Cake" />
                 </div>
                 <div className="details-container">
-                    <h2>Sunny Sideup Egg</h2>
-                    <h3>97 Calories</h3>
-                    <h3>&#8369; 15 </h3>
+                    <h2>Chocolate Mango</h2>
+                    <h3>451 Calories</h3>
+                    <h3>&#8369; 160</h3>
                 </div>
             </div>
 
             <div className="description">
                 <h3>Description</h3>
                 <div className="small-horizontal-line"></div> {/* New small horizontal line */}
-                <p>A sunny-side-up egg is a classic breakfast dish characterized by its bright, glossy yolk, which remains runny while 
-                    the egg white is cooked to a tender, slightly firm texture. 
-                    Typically containing about 97 calories, this delightful egg preparation provides a 
-                    good source of protein and essential nutrients.</p>       
+                <p>Chocolate cake or chocolate gâteau (from French: gâteau au chocolat) is a cake flavored with melted chocolate, cocoa powder, or both. 
+                    It can also have other ingredients such as fudge, vanilla creme, and other sweeteners.A Chocolate Cake and Mango Smoothie Combo offers the perfect balance of rich,
+                     decadent chocolate cake paired with the refreshing sweetness of a tropical mango smoothie. This delicious duo is an ideal treat for satisfying both your sweet tooth and your thirst, 
+                     making it a great choice for dessert or an indulgent snack!</p>       
             </div>
 
             <div className="quantity">
@@ -263,8 +263,8 @@ const SunnySideupEgg = () => {
 
 
                 .image-container img {
-                    width: 300px;
-                    height: 200px;
+                    width: 350px;
+                    height: 240px;
                     border-radius: 10px;
                     margin-right: 40px;
                     margin-left: 50px;
@@ -371,4 +371,4 @@ const SunnySideupEgg = () => {
     );
 };
 
-export default SunnySideupEgg;
+export default ChocolateMango;

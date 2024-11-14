@@ -1,55 +1,67 @@
-
+/* App Container */
 .app-container {
     display: flex;
     flex-direction: column;
     font-family: Arial, sans-serif;
-    height: 100vh; /* Full height to use available space */
-    overflow: hidden;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
 }
- 
+
 /* Content Container */
 .content-container {
-    display: flex;
-    flex: 1; /* Allow it to fill remaining space */
-    overflow: auto; /* Enable scrolling if content overflows */
+    flex: 1;
+    overflow: auto;
+    margin-left: 0; /* Removed margin to remove gap for sidebar */
+    padding-bottom: 60px;
 }
- 
+
 /* Header Styles */
 .header {
     display: flex;
-    align-items: center; /* Vertically center the content */
+    align-items: center;
     padding: 10px;
     background-color: #e4dede;
     color: black;
-    position: fixed; /* Fix it at the top */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px; /* Set a consistent height */
-    z-index: 1000; /* Ensure it stays on top of other elements */
-    
+    height: 80px;
+    z-index: 1000;
+    justify-content: space-between; /* Distribute space between items */
+    padding-left: 20px; /* Add gap to the left side of the header */
+    padding-right: 20px; /* Optional: Add some padding on the right */
 }
 
+/* Canteen Section */
 .canteen {
-    margin-left: auto; /* Pushes canteen text to the far right */
+    margin-left: auto;
     color: black;
-    background-color: #f9a72e; /* Background color */
-    padding: 10px 20px; /* Optional: Padding for spacing */
-    border-radius: 5px; /* Optional: Rounded corners */
-    display: flex; /* Use flex to center the text */
-    align-items: center; /* Center vertically */
-    height: 100%; /* Fill the height of the header */
+    background-color: #f9a72e;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    cursor: pointer;
+    color: #ffffff;
 }
- 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-right: 20px; /* Space between logo and nav links */
+.canteen:hover {
+    color: #ffffff;
+}
+
+/* Logo Image */
+.logo-image {
+    width: 50px;
+    height: auto;
 }
 
 .nav-links {
     display: flex;
-    gap: 20px; /* Space between the links */
+    gap: 20px;
+    justify-content: flex-end; /* Align nav links to the right */
+    flex: 1; /* Allow it to take up available space */
 }
 
 .nav-links a {
@@ -62,152 +74,209 @@
     text-decoration: underline;
 }
 
- 
-/* Separator Line */
-.separator {
-    position: fixed; /* Fixes the position of the line */
-    top: 160px; /* Adjust this value to position it below the header */
-    width: 100%; /* Full width of the viewport */
-    height: 2px; /* Height of the line */
-    background-color: #545454; /* Color of the line */
-    z-index: 999; /* Ensure it stays on top of other elements */
-    left: 0px;
-}
- 
-/* Sub Menu Navigation */
-.sub-menu-nav {
-    position: fixed;
-    top: 100px;
-    left: 15px;
-    padding: 10px 0; /* Added padding for spacing */
-    border-bottom: 2px solid #ddd; /* Thicker border for separation */
-}
- 
-.sub-menu-nav a {
-    text-decoration: none;
-    color: #333; /* Darker color for links */
-    padding: 10px 15px; /* Increased padding for better clickable area */
-    border-radius: 4px; /* Rounded corners for better aesthetics */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
-}
- 
-.sub-menu-nav a:hover {
-    background-color: #f9a72e; /* Change background on hover */
-    color: white; /* Change text color on hover */
-}
- 
-.sub-menu-nav .active {
-    border-bottom: 2px solid #90ee90; /* Highlighted for "Breakfast" */
-}
- 
-/* Content Container */
-.content-container {
-    display: flex;
-    flex: 1; /* Allow it to fill remaining space */
-    margin-top: 20px;
-}
- 
 /* Sidebar Styles */
 .sidebar {
-    position: fixed;
-    left: 20px;
-    top: 200px;
+    position: fixed; /* Fix the sidebar in place */
+    top: 80px !important; /* Starts just below the header */
+    left: 1px !important ; /* Move the sidebar 20px further to the left */
     padding: 20px;
-    background-color: #f4f4f4;
-    border-right: 2px solid #ccc; /* Thicker border for sidebar */
-    overflow-y: auto; /* Enable scrolling if content exceeds view */
+    background-color: #d3d3d3 !important;
+    width: 250px; /* Sidebar width remains fixed */
+    height: calc(100vh - 80px); /* Full height minus header height */
+    overflow-y: auto;
 }
- 
+
 .sidebar h3 {
     margin: 10px 0;
-    color: #333; /* Darker color for headers */
+    color: #ffffff;
 }
- 
+
 .sidebar ul {
+    
     list-style-type: none;
     padding: 0;
 }
- 
+
 .sidebar li {
+    top: 100px !important; 
     margin: 5px 0;
     cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition */
-}
- 
-.sidebar li:hover {
-    background-color: #f9a72e; /* Change background on hover */
-    color: white; /* Change text color on hover */
-}
- 
-/* Menu Grid Styles */
-.menu-grid {
-    position: fixed;
-    top: 150px;
-    left: 300px;
-    padding: 20px;
-    overflow-y: auto; /* Enable scrolling if content exceeds view */
+    transition: background-color 0.3s;
+    background-color: #d3d3d3;
 }
 
-.menu-items {
-    display: flex; /* Ensure flex display */
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    gap: 20px; /* Adjust space between items as needed */
+.sidebar li:hover {
+    background-color: #f9a72e;
+    color: #a9a9a9;
 }
+
+/* Menu Grid Styles */
+.menu-grid {
+    margin-left: 60px; /* Adjust content position to avoid gap from sidebar */
+    padding: 20px;
+    overflow-y: auto;
+    position: relative;
+    top: 80px; /* Starts below header */
+}
+
+.menu-grid h2 {
+    align-self: left; /* Center the title horizontally */
+    margin-top: 20px;
+    margin-right: 1000px; 
+    margin-bottom: 45px; 
+    margin-left: -40px; /* Adjust vertical positioning */
+}
+
+.separator {
+    position: fixed; /* Fixes the position of the line */
+    top: 145px !important; /* Adjust this value to position it below the header */
+    width: 100%; /* Full width of the viewport */
+    height: 3px !important; /* Height of the line */
+    background-color: #000000 !important; /* Color of the line */
+    z-index: 999; /* Ensure it stays on top of other elements */
+    left: 250px !important;
+}
+.sub-menu-nav {
+    position: fixed;
+    top: 90px !important; /* Just below header */
+    transform: translateX(280px);
+    padding: 10px 0;
+    display: flex; /* Enable flexbox for alignment */
+    justify-content: space-between; /* Push elements to the edges */
+    width: calc(100% - 280px); /* Adjust width to account for the sidebar */
+}
+
+.menu-links {
+    display: flex;
+    gap: 20px; /* Adjust space between menu items */
+}
+
+
+
+.profile-icon-container {
+    position: absolute; /* Position it absolutely within the header */
+    top: 5px; /* Adjust top positioning */
+    right: 40px; /* Move it to the right */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.icon {
+    width: 40px; /* Set a fixed size for the profile icon */
+    height: 40px; /* Set a fixed size for the profile icon */
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 60px; /* Adjust dropdown's position */
+    right: -15px;
+    background-color: #d3d3d3;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 150px; /* Set the dropdown width */
+    z-index: 1000;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu li {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #d3d3d3;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f9a72e;
+}
+
 
 /* Menu Item Styles */
 .menu-item {
-    display: flex; /* Change to flex to align items */
-    align-items: center; /* Center align items vertically */
+    display: flex;
+    align-items: center;
     text-align: center;
-    cursor: pointer; /* Change cursor to pointer */
-    transition: transform 0.3s; /* Smooth scaling effect */
-    flex: 0 1 calc(50% - 10px); /* Two items per row with space adjustment */
-    box-sizing: border-box; /* Include padding/border in width */
+    cursor: pointer;
+    transition: transform 0.3s;
+    flex: 0 1 calc(50% - 10px);
+    box-sizing: border-box;
 }
- 
+
 .menu-item:hover {
-    transform: scale(1.05); /* Slightly enlarge item on hover */
+    transform: scale(1.05);
 }
- 
+
 .menu-item-image {
-    width: 130px; /* Adjust image size */
-    height: 130px; /* Adjust image size */
-    border-radius: 50%; /* Circle image style */
-    margin-right: 10px; /* Space between image and text */
-    border: 2px solid #ccc; /* Add border around images */
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid #ccc;
 }
- 
+
 .menu-item span {
     display: block;
-    margin-top: 0; /* No margin since we are using flex */
+    margin-top: 0;
     font-weight: bold;
-    color: #333; /* Darker color for item names */
+    color: #333;
 }
- 
-/* Adjust selected item size for responsiveness */
+
+/* Selected Item Styles */
 .selected-item {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center align the image */
-    padding: 20px; /* Add padding */
-}
- 
- 
-/* Selected Item Styles */
-.selected-item img {
-    width: 150px; /* Set a fixed width */
-    height: 150px; /* Set a fixed height */
-    object-fit: cover; /* This ensures the image covers the area */
-    border-radius: 10px; /* Optional: rounded corners */
-    border: 2px solid #ccc; /* Optional: border around the image */
+    align-items: center;
+    padding: 20px;
 }
 
+.selected-item img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+}
+
+/* Horizontal Line */
 .horizontal-line {
-    position: fixed; /* Fixes the position of the line */
-    top: 80px; /* Adjust this value to position it below the header */
-    width: 100%; /* Full width of the viewport */
-    height: 4px; /* Height of the line */
-    background-color: #000000; /* Color of the line */
-    z-index: 999; /* Ensure it stays on top of other elements */
-    left: 0px;
+    position: fixed;
+    top: 80px;
+    width: 100%;
+    height: 4px;
+    background-color: #000000;
+    z-index: 999;
+    left: 0;
+}
+
+/* Responsive Adjustments for Sidebar */
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        width: 100%; /* Full width on small screens */
+        height: auto; /* Auto height to fit content */
+        top: 0; /* Remove fixed positioning */
+        margin-top: 80px; /* Adjust to avoid overlapping header */
+        background-color: #000000 !important;  /* Ensure background color stays */
+    }
+    .menu-grid {
+        left: 0; /* Adjust position */
+    }
+}
+
+.footer {
+    background-color: #e4dede ;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 15px 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    font-size: 14px;
 }

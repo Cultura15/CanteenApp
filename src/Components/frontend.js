@@ -69,6 +69,7 @@ import Users from './Admin side/users';
 import Transaction from './Admin side/transaction';
 import Feedback from './Feedback';
 import Account from './Account';
+import ChocolateMango from './Foods/ChocolateMango';
 const Frontend = () => {
     const [step, setStep] = useState('register');
     const [selectedCanteen, setSelectedCanteen] = useState(null);
@@ -130,6 +131,8 @@ const Frontend = () => {
                 <Route path="/canteen1/dessert/halo-halo" element={< HaloHalo />} />
                 <Route path="/canteen1/dessert/leche-flan" element={< LecheFlan />} />
                 <Route path="/canteen1/dessert/mango-float" element={< MangoFloat />} />
+                <Route path="/canteen1/viand/chocolate-mango" element={<ChocolateMango />} />
+
 
                 <Route path="/canteen2/cart2" element={<Cart2 />} />
                 <Route path="/canteen2/breakfast/tocino" element={<Tocino />} /> {/* Ensure this route matches */}

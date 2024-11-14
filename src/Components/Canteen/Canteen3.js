@@ -50,7 +50,7 @@ const Canteen3 = () => {
                         <a href="#cart">Cart</a>
                         <a href="#account">Account</a>
                     </nav>
-                    <div className="canteen">Canteen 3</div>
+                    <div className="canteen">Canteen</div>
                 </header>
                 <div className="horizontal-line"></div> {/* Add this line */}
                 {/* Add text below the horizontal line */}

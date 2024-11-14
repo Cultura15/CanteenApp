@@ -32,17 +32,45 @@ import ChocolateCake from '../Foods/ChocolateCake';
 import HaloHalo from '../Foods/HaloHalo';
 import LecheFlan from '../Foods/LecheFlan';
 import MangoFloat from '../Foods/MangoFloat';
+
+
+const Footer = () => (
+    <footer className="footer">
+        <p>&copy; 2024 Your Canteen Name. All Rights Reserved.</p>
+    </footer>
+);
+
 const Canteen1 = () => {
-   
     const location = useLocation();
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
     const initialCategory = searchParams.get('category') || 'breakfast';
     const [activeMenu, setActiveMenu] = useState(initialCategory);
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown visibility 
 
     useEffect(() => {
         setActiveMenu(initialCategory);
     }, [initialCategory]);
+
+    const toggleDropdown = () => {
+        setIsDropdownOpen((prevState) => !prevState);
+    };
+
+    const handleDropdownOptionClick = (option) => {
+        setIsDropdownOpen(false); // Close dropdown after selection
+        if (option === 'profile') {
+            navigate('/canteen1/account');
+        } else if (option === 'display') {
+            navigate('/canteen1/display');
+        } else if (option === 'logout') {
+            // Add logout logic here
+            localStorage.removeItem("user_id"); 
+            console.log('Logging out...');
+            navigate('/login');
+        }
+    };
+
+   
 
     const handleItemClick = (item) => {
         const formattedName = item.name.toLowerCase().replace(/\s+/g, '-');
@@ -50,67 +78,64 @@ const Canteen1 = () => {
         navigate(route);
     };
 
-   
-
-
-    const Header = () => {
-        return (
-            <>
-                <header className="header"> 
-                    <div className="logo">LOGO</div>
-                    <nav className="nav-links">
-                        <a href="#menu">Menu</a>
-                        <Link to="/canteen1/cart">Cart</Link> {/* Link to Cart */}
-                        <Link to="/canteen1/account">Account</Link>
-                    </nav>
-                    <div className="canteen">Canteen 1</div>
-                </header>
-                <div className="horizontal-line"></div> {/* Horizontal line below header */}
-            </>
-        );
-    };
-    
-
-    const SubMenuNav = () => (
-        <nav className="sub-menu-nav">
-            {['breakfast', 'lunch', 'snacks', 'drinks', 'dessert'].map((category) => (
-                <Link
-                    key={category}
-                    to={`?category=${category}`}
-                    className={activeMenu === category ? 'active' : ''}
-                    onClick={() => setActiveMenu(category)}
-                >
-                    {category.charAt(0).toUpperCase() + category.slice(1)}
-                </Link>
-            ))}
-        </nav>
+    const Header = () => (
+        <>
+            <header className="header">
+                <div className="logo">
+                    <img src="/assets/logo.png" alt="Logo" className="logo-image" />
+                </div>
+                <div className="canteen" onClick={() => navigate('/canteenSelection')} style={{ cursor: 'pointer' }}>
+                    Canteen
+                </div>
+            </header>
+            
+        </>
     );
 
-    const Sidebar = () => {
-        return (
-            <div className="sidebar">
-                <h3>Viand</h3>
-                <ul>
-                    <li>Egg</li>
-                    <li>Hotdog</li>
-                    <li>Pancakes</li>
-                    <li>Sandwich</li>
-                </ul>
-                <h3>Morning Drinks</h3>
-                <ul>
-                    <li>Hot Milo</li>
-                    <li>Hot Coffee</li>
-                    <li>Distilled Water</li>
-                </ul>
-                <h3>Combo</h3>
-                <ul>
-                    <li>Combo 1</li>
-                    <li>Combo 2</li>
-                    <li>Combo 3</li>
-                </ul>
+   
+    const SubMenuNav = () => (
+  
+        <nav className="sub-menu-nav">
+            <div className="menu-links">
+                {['breakfast', 'lunch', 'snacks', 'drinks', 'dessert'].map((category) => (
+                    <Link
+                        key={category}
+                        to={`?category=${category}`}
+                        className={activeMenu === category ? 'active' : ''}
+                        onClick={() => setActiveMenu(category)}
+                    >
+                        {category.charAt(0).toUpperCase() + category.slice(1)}
+                    </Link>
+                ))}
             </div>
-        );
-    };
+            <div className="profile-icon-container" onClick={toggleDropdown}>
+                <img src="/assets/profile.png" alt="Profile" className="icon" />
+                {isDropdownOpen && (
+                    <div className="dropdown-menu">
+                        <ul>
+                            <li onClick={() => handleDropdownOptionClick('profile')}>Profile</li>
+                            <li onClick={() => handleDropdownOptionClick('display')}>Display</li>
+                            <li onClick={() => handleDropdownOptionClick('logout')}>Logout</li>
+                        </ul>
+                    </div>
+                )}
+            </div>
+        </nav>
+    );
+    
+    const Sidebar = () => (
+        <div className="sidebar">
+            <nav>
+                <ul>
+                    <li onClick={() => navigate('/canteenSelection')}>Home</li>
+                    <li onClick={() => navigate('/canteen1/')}>Menu</li>
+                    <li onClick={() => navigate('/canteen1/account')}>Profile</li>
+                    <li onClick={() => navigate('/canteen1/cart')}>Cart</li>
+                </ul>
+            </nav>
+        </div>
+    );
+
 
     const MenuGrid = () => {
         const menuItems = {
@@ -162,6 +187,9 @@ const Canteen1 = () => {
                 { name: 'Mango Float', imgSrc: 'mangofloat.png', component: MangoFloat },
             ],
         };
+
+
+        
 
         const items = menuItems[activeMenu];
 
@@ -231,7 +259,9 @@ const Canteen1 = () => {
 
             // Add more conditions for other food items as needed
         };
+
         
+       
 
         return (
             <div className="menu-grid">
@@ -251,13 +281,13 @@ const Canteen1 = () => {
     return (
         <div className="app-container">
             <Header />
-            <div className="separator" />
             <SubMenuNav />
             <div className="separator" />
             <div className="content-container">
                 <Sidebar />
                 <MenuGrid activeMenu={activeMenu} onClickItem={handleItemClick} />
             </div>
+            <Footer /> {/* Add the Footer component here */}
         </div>
     );
 

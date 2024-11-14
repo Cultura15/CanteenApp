@@ -79,7 +79,7 @@ const Canteen2 = () => {
                         <Link to="/canteen2/cart2">Cart</Link> {/* Link to Cart */}
                         <a href="#account">Account</a>
                     </nav>
-                    <div className="canteen">Canteen 2</div>
+                    <div className="canteen">Canteen</div>
                 </header>
                 <div className="horizontal-line"></div> {/* Add this line */}
                 {/* Add text below the horizontal line */}
