@@ -175,7 +175,7 @@
     background-color: #d3d3d3;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     width: 150px; /* Set the dropdown width */
-    z-index: 1000;
+    z-index: 2000 !important;
 }
 
 .dropdown-menu ul {

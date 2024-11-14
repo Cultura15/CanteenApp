@@ -1,0 +1,135 @@
+/* Layout.css */
+
+/* General styles for the layout container */
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #4caf50; /* Example: Green header */
+    padding: 10px 20px;
+    color: white;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header .logo {
+    display: flex;
+    align-items: center;
+}
+
+.header .logo-image {
+    height: 40px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Submenu navigation styling */
+.sub-menu-nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f1f1f1; /* Example: Light gray submenu */
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sub-menu-nav .menu-links a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 15px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.sub-menu-nav .menu-links a.active {
+    background-color: #4caf50; /* Example: Active link color */
+    color: white;
+}
+
+.sub-menu-nav .menu-links a:hover {
+    background-color: #ddd;
+}
+
+.profile-icon-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f1f1f1;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 200px;
+    background-color: #333; /* Example: Dark sidebar */
+    color: white;
+    flex-shrink: 0;
+    padding: 20px 10px;
+    height: calc(100vh - 60px); /* Adjust to subtract header height */
+    position: fixed;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.sidebar nav ul li:hover {
+    text-decoration: underline;
+}
+
+/* Footer styling */
+.footer {
+    background-color: #4caf50; /* Example: Green footer */
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: auto;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Layout body content (main section) */
+.layout-content {
+    flex: 1;
+    margin-left: 200px; /* Offset for the fixed sidebar */
+    padding: 20px;
+    background-color: #fafafa; /* Example: Light background */
+    min-height: calc(100vh - 120px); /* Adjust for header and footer height */
+    overflow-y: auto;
+}
