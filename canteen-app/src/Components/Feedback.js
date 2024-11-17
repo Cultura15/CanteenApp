@@ -10,6 +10,7 @@ const Feedback = () => {
     comments: '',
     feedbackDate: new Date().toISOString(),
   });
+  const [orderHistory, setOrderHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -35,7 +36,17 @@ const Feedback = () => {
       }
     };
 
+    const fetchOrderHistory = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/orders/history/${userId}`);
+        setOrderHistory(response.data || []);
+      } catch (error) {
+        console.error('Error fetching order history:', error);
+      }
+    };
+
     fetchCartId();
+    fetchOrderHistory();
   }, [userId]);
 
   const handleInputChange = (e) => {
@@ -59,11 +70,7 @@ const Feedback = () => {
       setNewFeedback({ rating: '', comments: '', feedbackDate: new Date().toISOString() });
       
       alert('Feedback submitted! Thank you for your input.');
-      console.log('Feedback submitted');
-
-      // Navigate to the /canteen1 route after successful feedback submission
       navigate('/canteen1');
-      
     } catch (error) {
       console.error('Error creating feedback:', error);
       alert('There was an error submitting your feedback. Please try again later.');
@@ -75,36 +82,56 @@ const Feedback = () => {
   }
 
   return (
-    <div className="feedback-card">
-      <h2 className="feedback-title">Feedback</h2>
-      <p className="feedback-subtitle">We'd love to hear about your experience!</p>
-      <div className="feedback-input-group">
-        <label className="feedback-label">Rate your experience</label>
-        <div className="rating-stars">
-          {[...Array(5)].map((_, i) => (
-            <span
-              key={i}
-              className={`star ${newFeedback.rating >= i + 1 ? 'selected' : ''}`}
-              onClick={() => setNewFeedback({ ...newFeedback, rating: (i + 1).toString() })}
-            >
-              ★
-            </span>
-          ))}
+    <div className="feedback-container">
+      {/* Left side: Order History */}
+      <div className="order-history">
+        <h3>Order History</h3>
+        <ul className="order-list">
+          {orderHistory.length > 0 ? (
+            orderHistory.map((order, index) => (
+              <li key={index} className="order-item">
+                <span>Order #{order.orderId}</span> - <span>{order.date}</span>
+                <div>Total: ₱{order.totalAmount}</div>
+              </li>
+            ))
+          ) : (
+            <p>No previous orders found.</p>
+          )}
+        </ul>
+      </div>
+
+      {/* Right side: Feedback Form */}
+      <div className="feedback-card">
+        <h2 className="feedback-title">Feedback</h2>
+        <p className="feedback-subtitle">We'd love to hear about your experience!</p>
+        <div className="feedback-input-group">
+          <label className="feedback-label">Rate your experience</label>
+          <div className="rating-stars">
+            {[...Array(5)].map((_, i) => (
+              <span
+                key={i}
+                className={`star ${newFeedback.rating >= i + 1 ? 'selected' : ''}`}
+                onClick={() => setNewFeedback({ ...newFeedback, rating: (i + 1).toString() })}
+              >
+                ★
+              </span>
+            ))}
+          </div>
         </div>
+        <div className="feedback-input-group centered-input">
+          <label className="feedback-label">Your comments</label>
+          <textarea
+            name="comments"
+            placeholder="Tell us what you liked or how we can improve..."
+            value={newFeedback.comments}
+            onChange={handleInputChange}
+            rows="4"
+          />
+        </div>
+        <button onClick={handleCreateFeedback} className="submit-button">
+          <span className="submit-icon">🍔</span> Submit Feedback
+        </button>
       </div>
-      <div className="feedback-input-group centered-input">
-        <label className="feedback-label">Your comments</label>
-        <textarea
-          name="comments"
-          placeholder="Tell us what you liked or how we can improve..."
-          value={newFeedback.comments}
-          onChange={handleInputChange}
-          rows="4"
-        />
-      </div>
-      <button onClick={handleCreateFeedback} className="submit-button">
-        <span className="submit-icon">🍔</span> Submit Feedback
-      </button>
     </div>
   );
 };

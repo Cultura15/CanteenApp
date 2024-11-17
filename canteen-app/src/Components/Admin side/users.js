@@ -23,7 +23,7 @@ const Users = () => {
             }
             const data = await response.json();
             console.log("Fetched users:", data);
-            setUsers(data);
+            setUsers(data.map(user => ({ ...user, userId: user.userId }))); // Ensure userId is included
         } catch (error) {
             console.error("Error fetching users:", error);
             setError(error.message);
@@ -31,13 +31,20 @@ const Users = () => {
             setLoading(false);
         }
     };
+    
 
     const handleEdit = (user) => {
         setSelectedUser(user.userId);
-        setUserData({ fname: user.fname, lname: user.lname, email: user.email, password: user.password }); // Include password
+        setUserData({
+            fname: user.fname,
+            lname: user.lname,
+            email: user.email,
+            password: '', // New password to be entered
+            currentPassword: '' // Current password to be validated
+        });
         setUpdateMode(true);
     };
-
+    
     const handleUpdate = async () => {
         try {
             const response = await fetch(`http://localhost:8080/api/users/update/${selectedUser}`, {
@@ -45,22 +52,23 @@ const Users = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ...userData, userId: selectedUser }), // Send user ID as well
+                body: JSON.stringify({ ...userData, userId: selectedUser }), // Include userId and currentPassword
             });
-
+    
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-
+    
             await fetchUsers(); // Refresh the user list after update
             setUpdateMode(false); // Exit update mode
-            setUserData({ fname: '', lname: '', email: '', password: '' }); // Reset user data
+            setUserData({ fname: '', lname: '', email: '', password: '', currentPassword: '' }); // Reset user data
             setSelectedUser(null);
         } catch (error) {
             console.error("Error updating user:", error);
             setError(error.message);
         }
     };
+    
 
     // const handleDelete = async (userId) => {
     //     if (window.confirm("⚠️ Are you sure you want to delete this user? This action cannot be undone.")) {
@@ -162,7 +170,15 @@ const Users = () => {
                     <ul>
                             {users.filter(user => user.status !== "inactive").map(user => (
                                 <li key={user.userId}>
-                                    <span>{user.fname} {user.lname} - {user.email}</span>
+                                    <span>
+                                        <strong style={{ backgroundColor: '#FFD700', padding: '2px 5px', borderRadius: '4px', fontSize: '14px' }}>
+                                            ID: {user.userId}
+                                        </strong>
+                                        {' '} - {user.fname} {user.lname} - {user.email} 
+                                        <strong style={{ color: '#FF6347', marginLeft: '10px', fontSize: '12px' }}>
+                                            Password: {user.password}
+                                        </strong>
+                                    </span>
                                     <div className="button-group">
                                         <button className="edit-button" onClick={() => handleEdit(user)}>Edit</button>
                                         <button className="delete-button" onClick={() => handleDelete(user)}>Delete</button>
@@ -170,6 +186,7 @@ const Users = () => {
                                 </li>
                             ))}
                         </ul>
+
 
                     </div>
                 </div>
@@ -180,9 +197,10 @@ const Users = () => {
                         <input type="text" name="fname" value={userData.fname} onChange={handleChange} placeholder="First Name" />
                         <input type="text" name="lname" value={userData.lname} onChange={handleChange} placeholder="Last Name" />
                         <input type="email" name="email" value={userData.email} onChange={handleChange} placeholder="Email" />
-                        <input type="password" name="password" value={userData.password} onChange={handleChange} placeholder="Password" />
+                        <input type="password" name="password" value={userData.password} onChange={handleChange} placeholder="New Password" />
+                        <input type="password" name="currentPassword" value={userData.currentPassword} onChange={handleChange} placeholder="Current Password" />
                         <button onClick={handleUpdate}>Update User</button>
-                        <button onClick={() => { setUpdateMode(false); setUserData({ fname: '', lname: '', email: '', password: '' }); }}>Cancel</button>
+                        <button onClick={() => { setUpdateMode(false); setUserData({ fname: '', lname: '', email: '', password: '', currentPassword: '' }); }}>Cancel</button>
                     </div>
                 )}
             </div>

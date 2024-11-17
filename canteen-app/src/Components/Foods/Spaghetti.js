@@ -6,6 +6,7 @@ const Spaghetti = () => {
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1); // State to track quantity
     const [menuItem, setMenuItem] = useState(null);
+    const userId = localStorage.getItem('user_id');
 
     const handleBack = () => {
         navigate(-1); // Go back to the previous route
@@ -17,13 +18,13 @@ const Spaghetti = () => {
                 const response = await axios.get('http://localhost:8080/api/menu/get'); // Adjust this if necessary
                 console.log('Response data:', response.data); // Log the entire response data
                 
-                const eggItem = response.data.find(item => item.name === "SunnySideUp Egg"); // Replace with your actual condition
+                const eggItem = response.data.find(item => item.name === "Spaghetti"); // Replace with your actual condition
                 
                 if (eggItem) {
-                    console.log('Sunny Sideup Egg item:', eggItem); // Log the found item
+                    console.log('Spaghetti item:', eggItem); // Log the found item
                     setMenuItem(eggItem); // Set the fetched item
                 } else {
-                    console.warn('Sunny Sideup Egg not found in the fetched data.'); // Warn if not found
+                    console.warn('Spaghetti not found in the fetched data.'); // Warn if not found
                 }
             } catch (error) {
                 console.error('Error fetching menu items:', error);
@@ -40,6 +41,72 @@ const Spaghetti = () => {
         setQuantity(parseInt(e.target.value));
     };
 
+    // Function to add the item to the cart
+    const addToCart = async () => {
+        if (!menuItem) {
+            alert("Menu item not found.");
+            return;
+        }
+    
+        if (!userId) {
+            alert("User is not logged in.");
+            return;
+        }
+    
+        let cart;
+        try {
+            // Try to fetch the user's cart by userId
+            const cartResponse = await axios.get(`http://localhost:8080/api/cart/user/${userId}`);
+            cart = cartResponse.data;
+        } catch (error) {
+            console.warn('No existing cart found, creating a new one.');
+            const newCartData = {
+                totalAmount: 0.0,
+                user: { userId: userId }
+            };
+    
+            try {
+                // Create a new cart if none exists
+                const newCartResponse = await axios.post('http://localhost:8080/api/cart', newCartData);
+                cart = newCartResponse.data;
+
+                alert("Cart created successfully!");
+            } catch (error) {
+                console.error('Error creating new cart:', error);
+                alert("Failed to create cart.");
+                return;
+            }
+        }
+    
+        // Ensure the cart is valid
+        if (!cart || !cart.cartId) {
+            alert("Invalid cart. Please try again.");
+            return;
+        }
+    
+        // Structure the cart item data according to your DTO requirements
+        const cartItemData = {
+            cart: { cartId: cart.cartId },           // Reference to the cart
+            menuItem: { menuItemID: menuItem.menuItemID }, // Adjusted key to match your DTO
+            quantity: quantity, // This quantity is the amount you want to add
+            price: menuItem.price,
+            name: menuItem.name,
+            category: menuItem.category// You may also want to include the price if needed
+        };
+    
+        console.log('Sending cart item data:', cartItemData); // Debugging log
+    
+        try {
+            // Add item to cart
+            const itemResponse = await axios.post(`http://localhost:8080/api/cart-items/user/${userId}`, cartItemData);
+            console.log('Item added to cart:', itemResponse.data);
+            alert(`Added ${quantity} ${menuItem.name}(s) to cart!`);
+        } catch (error) {
+            console.error('Error adding to cart:', error);
+            alert("Failed to add item to cart.");
+        }
+    };
+
     // Reusing the Header component from Canteen1
     const Header = () => {
         return (
@@ -47,8 +114,8 @@ const Spaghetti = () => {
                 <header className="header">
                     <div className="logo">LOGO</div>
                     <nav className="nav-links">
-                    <Link to="/canteen1/">Menu</Link>
-                        <Link to="/canteen1/cart">Cart</Link> 
+                        <a href="#menu">Menu</a>
+                        <Link to="/canteen1/cart">Cart</Link> {/* Link to Cart */}
                         <a href="#account">Account</a>
                     </nav>
                     <div className="canteen">Canteen 1</div>
@@ -56,7 +123,7 @@ const Spaghetti = () => {
                 <div className="horizontal-line"></div> {/* Add this line */}
                 {/* Add text below the horizontal line */}
             <div className="food-path">
-                / Breakfast / Sunny Sideup            
+                / Lunch / Spaghetti           
             </div>
             
             <div className = "back-button-container">
@@ -75,21 +142,21 @@ const Spaghetti = () => {
             {/* Full width container with specific height */}
             <div className="food-detail-container">
                 <div className="image-container">
-                    <img src="/assets/eggs.png" alt="Sunny Sideup Egg" />
+                    <img src="/assets/spaghetti.png" alt="Spaghetti" />
                 </div>
                 <div className="details-container">
-                    <h2>Sunny Sideup Egg</h2>
-                    <h3>97 Calories</h3>
+                    <h2>Spaghetti</h2>
+                    <h3>158 Calories</h3>
+                    <h3>&#8369; 125</h3>
                 </div>
             </div>
 
             <div className="description">
                 <h3>Description</h3>
                 <div className="small-horizontal-line"></div> {/* New small horizontal line */}
-                <p>A sunny-side-up egg is a classic breakfast dish characterized by its bright, glossy yolk, which remains runny while 
-                    the egg white is cooked to a tender, slightly firm texture. 
-                    Typically containing about 97 calories, this delightful egg preparation provides a 
-                    good source of protein and essential nutrients.</p>       
+                <p>Spaghetti is a long, thin, solid, cylindrical pasta. It is a staple food of traditional Italian cuisine. 
+                    Like other pasta, spaghetti is made of milled wheat, water, and sometimes enriched with vitamins and minerals. 
+                    Italian spaghetti is typically made from durum-wheat semolina.</p>       
             </div>
 
             <div className="quantity">
@@ -110,7 +177,7 @@ const Spaghetti = () => {
 
             {/* Buttons */}
             <div className="action-buttons">
-                <button className="add-to-cart" onClick={() => alert(`Added ${quantity} Sunny Sideup Egg(s) to cart!`)}>
+            <button className="add-to-cart" onClick={addToCart}>
                     Add to Cart
                 </button>
                 <button className="reserve-item" onClick={() => alert(`Reserved ${quantity} Sunny Sideup Egg(s)`)}>

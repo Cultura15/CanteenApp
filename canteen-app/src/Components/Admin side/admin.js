@@ -157,6 +157,7 @@ const AdminPage = () => {
                     <Link to="/admin/feedbacks">View Feedbacks</Link>
                     <Link to="/admin/orders">View Orders</Link>
               
+              
                     
                     <button onClick={handleLogout} className="logout-button">Log Out</button>
                 </nav>
@@ -216,29 +217,38 @@ const AdminPage = () => {
                 </div>
 
                 <div className="menu-items-container">
-                    <h2>Current Menu Items</h2>
-                    <div className="categories-grid">
-                        {Object.keys(groupedItems).map((category) => (
-                            <div className="category-column" key={category}>
-                                <h3>{category}</h3>
-                                <ul>
-                                {groupedItems[category].map((item) => (
-                                    <li key={item.menuItemID}>
-                                        <span>{item.name} - {item.calories} Calories - &#8369;{item.price}</span>
-                                        <p>{item.description}</p>
-                                        {item.image && <img src={item.image} alt={item.name} style={{ maxWidth: '100px', display: 'block' }} />}
-                                        <div className="button-group">
-                                            <button className="edit-button" onClick={() => handleEditItem(item)}>Edit</button>
-                                            <button className="delete-button" onClick={() => handleDeleteItem(item.menuItemID)}>Delete</button>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-
-                            </div>
-                        ))}
+                        <h2>Current Menu Items</h2>
+                        <div className="categories-grid">
+                            {Object.keys(groupedItems).map((category) => (
+                                <div className="category-column" key={category}>
+                                    <h3>{category}</h3>
+                                    <ul>
+                                        {groupedItems[category].map((item) => (
+                                            <li key={item.menuItemID}>
+                                                <span>
+                                                    <strong style={{ backgroundColor: '#FFD700'}} className="menu-id-highlight">Menu ID: {item.menuItemID}</strong> - {item.name} - {item.calories} Calories - &#8369;{item.price}
+                                                </span>
+                                                <p>{item.description}</p>
+                                                {item.image && (
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.name}
+                                                        style={{ maxWidth: '100px', display: 'block' }}
+                                                    />
+                                                )}
+                                                <div className="button-group">
+                                                    <button className="edit-button" onClick={() => handleEditItem(item)}>Edit</button>
+                                                    <button className="delete-button" onClick={() => handleDeleteItem(item.menuItemID)}>Delete</button>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                </div>
+
+
             </div>
         </div>
     );

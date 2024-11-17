@@ -1,17 +1,27 @@
 /* CanteenSelection.css */
+/* Importing Poppins font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
 .canteen-container {
-    background-color: #f9a72e;
-    height: 100vh; /* Full viewport height */
-    width: 100vw; /* Full viewport width */
+    background-color: beige;
+    height: 76vh; /* Full viewport height */
+    width: 85.2vw; /* Full viewport width */
     display: flex;
+    margin-left: 250px !important;
+    margin-top: 70px !important;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 0; /* Ensure there's no margin around the container */
     padding: 0; /* Ensure there's no padding */
     box-sizing: border-box; /* Include padding/border in the element's width and height */
+    font-family: 'Poppins', sans-serif;
 }
-
+ 
 .app-title {
     position: absolute;
     top: 10px;
@@ -19,31 +29,43 @@
     color: black;
     font-size: 24px;
     font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
-
+ 
 .select-location {
     color: black;
     font-size: 28px;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 90px;
 }
-
+ 
 .button-group {
     display: flex;
     gap: 20px;
 }
-
+ 
 .canteen-btn {
-    background-color: #545454;
-    color: white;
+    background-color: #f9a72e !important;
+    color: black !important;
     border: none;
-    border-radius: 50px;
-    padding: 15px 30px;
-    font-size: 18px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    border-radius: 50px !important;
+    padding: 25px 30px !important; /* Adjust padding for height */
+    width: 400px; /* Fixed width for all buttons */
+    font-size: 19px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
+ 
 .canteen-btn:hover {
     background-color: #3e3e3e;
+   
 }
+ 
+.logo-select {
+    margin-bottom: -15px;
+    height:  70px;
+    width: 70px;
+}
+ 

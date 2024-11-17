@@ -125,24 +125,26 @@ const Transaction = () => {
                     <h2>Payment List</h2>
                 </div>
 
-                <div className="menu-items-container">
-                    <h2>Current Payments</h2>
-                    <div className="categories-grid">
-                        <ul>
-                            {payments.map(payment => (
-                                <li key={payment.paymentId}>
-                                    <span>
-                                        {payment.paymentMethod} - {payment.paymentDate} - ${payment.totalAmount}
-                                    </span>
-                                    <div className="button-group">
-                                        <button onClick={() => handleEdit(payment)}>Edit</button>
-                                        <button className="delete-button" onClick={() => handleDelete(payment.paymentId)}>Delete</button>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
+                                    <div className="menu-items-container">
+                        <h2>Current Payments</h2>
+                        <div className="categories-grid">
+                            <ul>
+                                {payments.map(payment => (
+                                    <li key={payment.paymentId}>
+                                        <span>
+                                            <strong style={{ backgroundColor: '#FFD700'}} className="transaction-id-highlight">Transaction ID: {payment.paymentId}</strong>
+                                            &nbsp;- {payment.paymentMethod} - {payment.paymentDate} - ${payment.totalAmount}
+                                        </span>
+                                        <div className="button-group">
+                                            <button onClick={() => handleEdit(payment)}>Edit</button>
+                                            <button className="delete-button" onClick={() => handleDelete(payment.paymentId)}>Delete</button>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
-                </div>
+
 
                 {updateMode && (
                     <div className="update-form">

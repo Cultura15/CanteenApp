@@ -1,0 +1,289 @@
+/* Add this at the top of your cart.css or index.css file */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+
+.cart-page {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 83vh;
+    width: 100vw;
+    overflow: hidden;
+}
+ 
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #e4dede;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+ 
+.cart-content {
+    display: flex;
+    flex: 1;
+    margin-top: 80px;
+    margin-left: 250px;
+    width: 85.5vw;
+    height: calc(100vh - 100px); /* Adjust for header height */
+}
+ 
+.logo {
+    font-weight: bold;
+    font-size: 20px;
+}
+.icon-container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Space between icons */
+    margin-top: 8px;
+    height: 50px; /* Adjust as needed for consistent centering */
+}
+
+.editicon,
+.delicon {
+    width: 24px; /* Icon size */
+    height: 24px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transition */
+    /* Ensure no border-radius or background that creates the circle */
+}
+
+.editicon:hover,
+.delicon:hover {
+    transform: translateY(-5px) scale(1.1); /* Slight lift and scaling effect */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.25); /* 3D shadow effect on hover */
+}
+
+ 
+.nav-links {
+    display: flex;
+    margin-left: 20px;
+    gap: 20px;
+}
+ 
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+ 
+.canteen {
+    margin-left: auto;
+    background-color: #f9a72e;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+ 
+.left-panel {
+    width: 25%;
+    background-color: #f6a12e;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Ensure items are aligned to the start (left) */
+    height: 100%;
+    box-sizing: border-box;
+}
+ 
+.back-button {
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 30px; /* Space below the button */
+    align-self: flex-start; /* This keeps the button to the left */
+    margin-left: 0; /* Ensure it's flush against the left edge */
+}
+ 
+.review-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    margin-left: 50px;
+    font-weight: bold;
+}    
+ 
+.right-panel {
+    width: 75%;
+    background-color: beige;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    height: 100%; /* Full height */
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+ 
+.item-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    padding: 10px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(230, 230, 230, 0.1), 0 6px 20px rgba(0, 0, 0, 0.15); /* 3D shadow effect */
+    width: 50%;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transition on hover */
+}
+
+
+
+
+ 
+.item-box img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+ 
+.order-summary {
+    background: white;
+    border: black 1px solid;
+    padding: 15px;
+    border-radius: 5px;
+    width: 45%;
+    text-align: left;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.dots {
+    color: whitegray; /* Change to the color you want for the dots */
+    font-weight: normal; /* Keeps the dots not bold */
+}
+ 
+.order-summary hr {
+    margin: 10px 0;
+}
+ 
+.continue-button {
+    padding: 15px 40px; /* Adjust for a smaller button */
+    background-color: #545454;
+    color: white;
+    border: none;
+    border-radius: 25px; /* Smaller rounded corners */
+    cursor: pointer;
+    position: fixed; /* Fixed position relative to the viewport */
+    bottom: 100px; /* Distance from the bottom of the viewport */
+    right: 50px; /* Distance from the right of the viewport */
+    font-size: 14px; /* Adjust font size */
+    width: auto; /* Ensure button width doesn't expand */
+    display: inline-block; /* Keeps button size to its content */
+}
+ 
+.continue-button:hover {
+    background-color: #4c4c4c;
+}
+
+.item-details input[type="number"] {
+    width: 60px; /* Adjust the width of the input field */
+    padding: 10px; /* Add some padding for a more spacious feel */
+    font-size: 16px; /* Set font size */
+    border: 2px solid #ccc; /* Light border for the input field */
+    border-radius: 10px; /* Rounded corners */
+    background-color: #f4f4f4; /* Light background color */
+    color: #333; /* Text color */
+    text-align: center; /* Center the number inside the input */
+    transition: all 0.3s ease; /* Smooth transition for hover and focus */
+}
+
+/* Add a focus effect */
+.item-details input[type="number"]:focus {
+    border-color: #f9a72e; /* Change border color on focus */
+    background-color: #fff; /* Make the background white when focused */
+    box-shadow: 0 0 8px rgba(249, 167, 46, 0.5); /* Glow effect on focus */
+}
+
+/* Add hover effect */
+.item-details input[type="number"]:hover {
+    border-color: #f9a72e; /* Change border color on hover */
+}
+
+/* Add a button-like effect on the up/down arrows */
+.item-details input[type="number"]::-webkit-outer-spin-button,
+.item-details input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Customize the input buttons (arrows) */
+.item-details input[type="number"]:focus::-webkit-outer-spin-button,
+.item-details input[type="number"]:focus::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/* Optional: Add a custom arrow design for the number input (using :after) */
+.item-details input[type="number"]::-webkit-outer-spin-button:after {
+    content: '↑'; /* Up arrow for increase */
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+/*DELETE SELECTOR BUTTON*/
+.delete-selected-button {
+    background-color: #e74c3c; /* Red background */
+    color: white; /* White text */
+    padding: 8px 16px; /* Small padding for the button */
+    font-size: 14px; /* Smaller font size */
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* Light shadow */
+    transition: all 0.3s ease; /* Smooth transition for effects */
+    width: 150px;
+}
+
+/* 3D effect on hover */
+.delete-selected-button:hover {
+    transform: translateY(-4px); /* Move the button slightly up */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1); /* Deeper shadow */
+}
+
+/* Active state for the button */
+.delete-selected-button:active {
+    transform: translateY(2px); /* Button pushes down when clicked */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05); /* Light shadow when active */
+}
+
+
+/* Add to Cart.css */
+.loading-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-screen img {
+    width: 5%; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+.loading-screen h2 {
+    font-weight: bolder;
+    font-size: 35px;
+    color: #333;
+    transform: perspective(300px) rotateX(5deg); /* 3D effect */
+    margin: 0;
+}

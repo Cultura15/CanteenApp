@@ -1,0 +1,173 @@
+/* Layout.css */
+ 
+/* General styles for the layout container */
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+ 
+/* Header styling */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: whitesmoke !important ; /* Example: Green header */
+    padding: 10px 20px;
+    color: white;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header p{
+    font-size: 25px;
+    font-weight: bold;
+
+}
+ 
+.header .logo {
+    display: flex;
+    align-items: center;
+}
+ 
+.header .logo-image {
+    height: 60px;
+    width: 60px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+ 
+/* Submenu navigation styling */
+.sub-menu-nav {
+    display: flex;
+    justify-content: space-between;
+    background-color: beige;
+    padding: 10px 20px;
+    height: 67px;
+    width: calc(100% - 230px) !important; /* Further reduced the subtraction to make it larger */
+    margin-left: 6px; /* Ensure alignment */
+    margin-top: -20px;
+    box-sizing: border-box; /* Includes padding in width */
+}
+ 
+.sub-menu-nav .menu-links {
+    margin-left: 30px; /* Push the menu links to the right */
+    margin-top: 9px;
+}
+ 
+.sub-menu-nav .menu-links a {
+    text-decoration: none;
+    color: #333;
+    margin-right: 15px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+ 
+.sub-menu-nav .menu-links a.active {
+    border-bottom: 3px solid #70795e; /* Example: Active link color */
+    color: black;
+}
+ 
+.sub-menu-nav .menu-links a:hover {
+    background-color: #70795e;
+}
+ 
+.profile-icon-container {
+    position: relative;
+    cursor: pointer;
+    margin-top: 7px;
+    margin-left: 1605px;
+}
+
+.user-greeting {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #333; /* Adjust color as needed */
+    font-weight: bold;
+}
+ 
+.dropdown-menu {
+    position: absolute;
+    margin-right: 1px;
+    top: 40px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+}
+ 
+.dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ 
+.dropdown-menu li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+ 
+.dropdown-menu li:hover {
+    background-color: #f1f1f1;
+}
+ 
+/* Sidebar styling */
+.sidebar {
+    width: 200px;
+    background-color: #333 ; /* Example: Dark sidebar */
+    color: black;
+    flex-shrink: 0;
+    padding: 20px 10px;
+    height: calc(100vh - 60px); /* Adjust to subtract header height */
+    position: fixed;
+}
+ 
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+ 
+.sidebar nav ul li {
+    margin: 15px 0;
+    cursor: pointer;
+}
+ 
+.sidebar li.active-sidebar-item {
+    background-color: maroon; /* Active item background color */
+    color: white; /* Active item text color */
+    font-weight: bold;
+}
+ 
+/* Footer styling */
+.footer {
+    background-color: whitesmoke !important ; /* Example: Green footer */
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: auto;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+ 
+/* Layout body content (main section) */
+.layout-content {
+    flex: 1;
+    margin-left: 200px; /* Offset for the fixed sidebar */
+    padding: 20px;
+    background-color: #fafafa; /* Example: Light background */
+    min-height: calc(100vh - 120px); /* Adjust for header and footer height */
+    overflow-y: auto;
+}
+ 
+.separator {
+    position: fixed; /* Fixes the position of the line */
+    top: 145px !important; /* Adjust this value to position it below the header */
+    width: 100%; /* Full width of the viewport */
+    height: 3px !important; /* Height of the line */
+    background-color: #000000 !important; /* Color of the line */
+    z-index: 999; /* Ensure it stays on top of other elements */
+    left: 250px !important;
+}
+

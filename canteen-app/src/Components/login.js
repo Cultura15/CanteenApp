@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './frontend.css';
+import styles from './login.module.css'; // Import CSS module styles
 
 const Login = ({ onSuccess }) => {
     const [loginData, setLoginData] = useState({
@@ -50,50 +50,59 @@ const Login = ({ onSuccess }) => {
     };
 
     return (
-        <div className="form-container">
-            <h2>Login</h2>
-            <form onSubmit={submitLoginForm}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        value={loginData.email}
-                        onChange={handleLoginChange}
-                        required
-                    />
+        <div className={styles['outer-container']}> {/* Outer container */}
+            <div className={styles['container']}> {/* Container for the entire page */}
+                <div className={styles['left-panel']}> {/* Left panel with form */}
+                    <h2>Login</h2>
+                    <form onSubmit={submitLoginForm}>
+                        <div>
+                            <label htmlFor="email">Email:</label>
+                            <input
+                                type="email"
+                                id="email"
+                                value={loginData.email}
+                                onChange={handleLoginChange}
+                                required
+                            />
+                        </div>
+                        <div className="password-field">
+                            <label htmlFor="password">Password:</label>
+                            <div style={{ position: 'relative', width: '100%' }}>
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    id="password"
+                                    value={loginData.password}
+                                    onChange={handleLoginChange}
+                                    required
+                                    style={{ paddingRight: '30px' }} // Extra space for the icon
+                                />
+                                <img
+                                    src={showPassword ? '/assets/open.png' : '/assets/close.png'}
+                                    alt={showPassword ? 'Hide password' : 'Show password'}
+                                    className={styles['password-toggle-icon']} // Apply styles for the icon
+                                    onClick={togglePasswordVisibility}
+                                    style={{
+                                        position: 'absolute',
+                                        right: '10px',
+                                        top: '50%',
+                                        transform: 'translateY(-50%)',
+                                        cursor: 'pointer',
+                                        width: '20px'
+                                    }}
+                                />
+                            </div>
+                        </div>
+                        <div className='signinn'>
+                            <button type="submit">Login</button>
+                        </div>
+                    </form>
                 </div>
-                <div className="password-field">
-                    <label htmlFor="password">Password:</label>
-                    <div style={{ position: 'relative', width: '100%' }}>
-                        <input
-                            type={showPassword ? 'text' : 'password'}
-                            id="password"
-                            value={loginData.password}
-                            onChange={handleLoginChange}
-                            required
-                            style={{ paddingRight: '30px' }} // Extra space for the icon
-                        />
-                        <img
-                            src={showPassword ? '/assets/open.png' : '/assets/close.png'}
-                            alt={showPassword ? 'Hide password' : 'Show password'}
-                            className="password-toggle-icon"
-                            onClick={togglePasswordVisibility}
-                            style={{
-                                position: 'absolute',
-                                right: '10px',
-                                top: '50%',
-                                transform: 'translateY(-50%)',
-                                cursor: 'pointer',
-                                width: '20px'
-                            }}
-                        />
-                    </div>
+                <div className={styles['right-panel']}> {/* Right panel */}
+                    <h1>Welcome Back!</h1>
+                    <h2>Login to Continue</h2>
+                    <div className={styles['logo']}>Logo</div>
                 </div>
-                <div>
-                    <button type="submit">Login</button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 };

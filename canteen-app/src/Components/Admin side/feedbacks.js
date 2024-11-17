@@ -123,14 +123,15 @@ const Feedbacks = () => {
                     <h2>Feedback List</h2>
                 </div>
 
-                <div className="menu-items-container">
+                                <div className="menu-items-container">
                     <h2>Current Feedbacks</h2>
                     <div className="categories-grid">
                         <ul>
                             {feedbacks.map(feedback => (
                                 <li key={feedback.feedbackID}>
                                     <span>
-                                        {feedback.rating} - {feedback.comments} - {feedback.feedbackDate}
+                                        <strong style={{ backgroundColor: '#FFD700'}} className="feedback-id-highlight">Feedback ID: {feedback.feedbackID}</strong>
+                                        &nbsp;- Rating: {feedback.rating} - {feedback.comments} - {feedback.feedbackDate}
                                     </span>
                                     <div className="button-group">
                                         <button onClick={() => handleEdit(feedback)}>Edit</button>
@@ -141,6 +142,7 @@ const Feedbacks = () => {
                         </ul>
                     </div>
                 </div>
+
 
                 {updateMode && (
                     <div className="update-form">

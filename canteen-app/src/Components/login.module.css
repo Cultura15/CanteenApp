@@ -1,0 +1,152 @@
+
+.outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffffff; /* Orange background */
+}
+
+/* Container for the entire login page */
+.container {
+  display: flex;
+  width: 1000px; /* Adjusted width to match the design */
+  height: 600px; /* Adjusted height to match the design */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Left panel (Sign-in form) */
+.left-panel {
+  width: 50%;
+  background-color: #fff5e6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.left-panel h2 {
+  margin-bottom: 20px;
+  color: #000;
+  font-weight: bold;
+}
+
+.left-panel form {
+  width: 80%;
+  max-width: 300px;
+}
+
+.left-panel label {
+  font-size: 16px;
+  color: #000;
+}
+
+.left-panel input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background-color: #d9d9d9;
+}
+
+.left-panel button {
+  width: 100%;
+  padding: 10px;
+  background-color: #8b0000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.left-panel button:hover {
+  background-color: #a40000;
+}
+
+/* Right panel (Welcome message) */
+.right-panel {
+  width: 50%;
+  background-color: #a22e2e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.right-panel h1 {
+  font-size: 24px;
+}
+
+.right-panel h2 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  background-color: #6e6e56;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  color: black;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+
+/* Sign in button */
+
+.signinn button {
+    width: 150px; /* Set the width of the buttons */
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px; /* Apply border-radius to make the buttons round */
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth transition for hover and active states */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 3D shadow effect */
+    background-color: #007bff; /* Default blue for Sign up */
+    color: white;
+   
+}
+
+.signinn{
+  width: 200px; 
+  background-color: transparent; /* Make the background transparent */
+  color: #000000; /* Green text color */
+  border: 2px solid rgba(0, 0, 0, 0.3); /* Thin black border with reduced opacity */
+  padding: 12px 20px;
+  border-radius: 30px; /* Rounded corners */
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Smooth transition for hover and active states */
+}
+
+/* Hover effect for 3D look */
+.signinn button:hover {
+  background-color: #c22222; /* Darker green */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increased shadow for hovering */
+  transform: translateY(-3px); /* Slightly raise the button */
+}
+
+/* Active effect for 3D look */
+.signinn button:active {
+  background-color: #1e7e34; /* Even darker green on click */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Smaller shadow when pressed */
+  transform: translateY(2px); /* Push the button down to simulate pressing */
+}

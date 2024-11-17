@@ -1,8 +1,10 @@
+/* Add this at the top of your cart.css or index.css file */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 .app-container {
     display: flex;
     flex-direction: column;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     height: 100vh; /* Full height to use available space */
     overflow: hidden;
 }
@@ -28,6 +30,12 @@
     height: 80px; /* Set a consistent height */
     z-index: 1000; /* Ensure it stays on top of other elements */
     
+}
+
+.header p{
+    font-size: 25px;
+    font-weight: bold;
+
 }
 
 .canteen {
@@ -67,21 +75,49 @@
 .separator {
     position: fixed; /* Fixes the position of the line */
     top: 160px; /* Adjust this value to position it below the header */
-    width: 100%; /* Full width of the viewport */
-    height: 2px; /* Height of the line */
+    width: 90%; /* Full width of the viewport */
+    height: 4px; /* Height of the line */
     background-color: #545454; /* Color of the line */
     z-index: 999; /* Ensure it stays on top of other elements */
-    left: 0px;
+    left: 200px;
 }
  
 /* Sub Menu Navigation */
 .sub-menu-nav {
     position: fixed;
     top: 100px;
-    left: 15px;
+    left: 220px;
     padding: 10px 0; /* Added padding for spacing */
     border-bottom: 2px solid #ddd; /* Thicker border for separation */
+    
 }
+
+.profile-icon-container {
+    position: absolute; /* Position it absolutely within the header */
+    top: 5px; /* Adjust top positioning */
+    left: 10px; /* Move it to the right */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 40px; /* Position it below the profile icon */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    width: 120px; /* Set width for the dropdown */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    z-index: 1000; /* Ensure it stays on top of other content */
+}
+
+.icon {
+    width: 40px; /* Set a fixed size for the profile icon */
+    height: 40px; /* Set a fixed size for the profile icon */
+}
+
  
 .sub-menu-nav a {
     text-decoration: none;
@@ -212,3 +248,18 @@
     z-index: 999; /* Ensure it stays on top of other elements */
     left: 0px;
 }
+
+.footer {
+    background-color: #000000 ;
+    color: rgb(0, 0, 0) !important;
+    text-align: center;
+    padding: 15px 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+ 
+    font-size: 14px;
+}
+ 
