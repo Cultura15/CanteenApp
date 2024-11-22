@@ -1,0 +1,215 @@
+.payment-container {
+  width: 45%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.3); /* Adds the 3D effect */
+  z-index: 2;
+  transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+.payment-options-container {
+  background-color: transparent; /* Transparent background */
+  border: 4px solid #000; /* Black outline */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px;
+  margin-top: 100px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.payment-header {
+  display: flex;
+  align-items: center;  /* Align the back button and logo horizontally */
+}
+
+.payment-title {
+  text-align: center;
+  margin-top: 20px; 
+  margin-right: 300px;/* Space between the logo and the title */
+}
+
+.hi{
+  font-size: 20px;
+  margin-right: 220px;/* Space between the logo and the title */
+}
+
+
+.payment-title h1{
+  white-space: nowrap; 
+  margin-top: 20px; 
+  margin-left: 97px;/* Space between the logo and the title */
+}
+
+.back-button {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #000;
+
+  width: 100px;
+  margin-top: 50px;
+  
+  
+}
+
+.payment-logo {
+  width: 80px;
+  height: auto;
+}
+
+.payment-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.payment-content {
+  display: flex;
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.google-pay-button {
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.payment-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.payment-option.selected {
+  border-color: #007bff;
+  background: #e6f0ff;
+}
+
+.method-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.personal-info {
+  margin-top: 100px !important;
+  font-size: px !important;
+  color: #555;
+}
+
+.pay-now-button {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 700px;
+  margin-left:100px;
+  font-weight: bolder;
+}
+
+.summary-container {
+  position: absolute; /* Positioned absolutely */
+  left: 50%; /* Align to the left with some margin */
+  top: 150px; /* Position slightly below the top of the page */
+  width: 45%; /* Adjust width as per your design */
+  background-color: transparent; /* Transparent background */
+  border: 2px solid #000; /* Black outline */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding inside the container */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.summary-container h3{
+  font-weight: bolder;
+  font-size: 30px;;
+}
+
+.order-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.order-total {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.personal-info {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Space between name and email */
+}
+
+.user-image {
+  width: 20px; /* Adjust the size of the profile/image icons */
+  height: 20px;
+  margin-right: 10px; /* Space between the image and the text */
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it’s on top of other elements */
+}
+
+.loading-gif {
+  width: 100px; /* Adjust the size of the loading GIF */
+  height: auto;
+}
+
+.loading-overlay h2 {
+  font-weight: bolder;
+  font-size: 35px;
+  color: #ffffff;
+  transform: perspective(300px) rotateX(5deg); /* 3D effect */
+  margin: 0;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-img, .email-img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
