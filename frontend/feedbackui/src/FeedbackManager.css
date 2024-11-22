@@ -3,26 +3,35 @@
   margin: 20px auto;
   padding: 30px;
   border: 1px solid #ffc107;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.feedback-card:hover {
+  transform: translateY(-5px);
 }
 
 .feedback-title {
   color: #b74b13;
-  font-size: 1.5rem;
-  margin-bottom: 5px;
+  font-size: 1.75rem;
+  margin-bottom: 10px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
 }
 
 .feedback-subtitle {
   color: #b74b13;
   font-size: 1rem;
   margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .feedback-input-group {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .feedback-label {
@@ -30,6 +39,8 @@
   font-size: 1rem;
   margin-bottom: 8px;
   display: block;
+  font-weight: 600;
+  text-align: center;
 }
 
 .rating-stars {
@@ -38,34 +49,55 @@
   display: flex;
   justify-content: center;
   cursor: pointer;
+  gap: 8px;
+  transition: color 0.3s;
 }
 
+.star {
+  margin: 0 5px;
+  transition: transform 0.2s, color 0.3s;
+}
+
+.star:hover,
 .star.selected {
   color: #ffc107;
 }
 
 textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ffc107;
-  border-radius: 5px;
+  border-radius: 8px;
   resize: none;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
 }
 
 .submit-button {
   background-color: #ff8c00;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
+  margin-top: 15px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #e07c00;
+  transform: translateY(-3px);
+}
+
+.edit-feedback-button {
+  margin-top: 15px;
 }
 
 .submit-icon {
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 .centered-input {
@@ -77,5 +109,30 @@ textarea {
 
 .centered-input textarea {
   width: 100%;
-  max-width: 400px;
+  max-width: 380px;
+}
+
+.thank-you-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.thank-you-message {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px 40px;
+  border-radius: 12px;
+  color: #28a745;
+  font-size: 1.25rem;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

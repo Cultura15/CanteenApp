@@ -37,24 +37,28 @@ const EditFeedback = () => {
   }, []);
 
   const handleUpdateFeedback = async (feedbackID, updatedFeedback) => {
-    try {
-      await axios.put(`http://localhost:8080/api/feedback/update/${feedbackID}`, updatedFeedback);
-      alert('Feedback updated successfully!');
-      const response = await axios.get('http://localhost:8080/api/feedback/allfeedback');
-      setFeedbackList(response.data);
-      setEditingFeedback(null);
-    } catch (error) {
-      console.error('Error updating feedback:', error);
+    if (window.confirm('Are you sure you want to update this record?')) {
+      try {
+        await axios.put(`http://localhost:8080/api/feedback/update/${feedbackID}`, updatedFeedback);
+        alert('Feedback updated successfully!');
+        const response = await axios.get('http://localhost:8080/api/feedback/allfeedback');
+        setFeedbackList(response.data);
+        setEditingFeedback(null);
+      } catch (error) {
+        console.error('Error updating feedback:', error);
+      }
     }
   };
 
   const handleDeleteFeedback = async (feedbackID) => {
-    try {
-      await axios.delete(`http://localhost:8080/api/feedback/delete/${feedbackID}`);
-      alert('Feedback deleted successfully!');
-      setFeedbackList(feedbackList.filter(item => item.feedbackID !== feedbackID));
-    } catch (error) {
-      console.error('Error deleting feedback:', error);
+    if (window.confirm('Are you sure you want to delete this record?')) {
+      try {
+        await axios.delete(`http://localhost:8080/api/feedback/delete/${feedbackID}`);
+        alert('Feedback deleted successfully!');
+        setFeedbackList(feedbackList.filter(item => item.feedbackID !== feedbackID));
+      } catch (error) {
+        console.error('Error deleting feedback:', error);
+      }
     }
   };
 
@@ -105,7 +109,8 @@ const EditFeedback = () => {
               </div>
             ) : (
               <div>
-                <strong>Rating:</strong> {item.rating} | <strong>Comments:</strong> {item.comments}
+                <div><strong>Rating:</strong> {item.rating}</div>
+                <div><strong>Comments:</strong> {item.comments}</div>
                 <button 
                   onClick={() => handleEditClick(item)} 
                   className="submit-button"

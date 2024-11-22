@@ -9,7 +9,8 @@ const FeedbackManager = () => {
     comments: '',
     feedbackDate: new Date().toISOString(),
   });
-
+  const [hoveredStar, setHoveredStar] = useState(null);
+  const [isFeedbackSubmitted, setIsFeedbackSubmitted] = useState(false);
   const navigate = useNavigate();
 
   const generateAutoID = () => Math.floor(Math.random() * 10000).toString();
@@ -35,6 +36,9 @@ const FeedbackManager = () => {
     try {
       await axios.post('http://localhost:8080/api/feedback/addfeedback', feedbackWithIDs);
       setNewFeedback({ rating: '', comments: '', feedbackDate: new Date().toISOString() });
+      setIsFeedbackSubmitted(true);
+
+      setTimeout(() => setIsFeedbackSubmitted(false), 3000);
     } catch (error) {
       console.error('Error creating feedback:', error);
     }
@@ -55,8 +59,10 @@ const FeedbackManager = () => {
           {[...Array(5)].map((_, i) => (
             <span
               key={i}
-              className={`star ${newFeedback.rating >= i + 1 ? 'selected' : ''}`}
+              className={`star ${newFeedback.rating >= i + 1 || hoveredStar >= i + 1 ? 'selected' : ''}`}
               onClick={() => setNewFeedback({ ...newFeedback, rating: (i + 1).toString() })}
+              onMouseEnter={() => setHoveredStar(i + 1)}
+              onMouseLeave={() => setHoveredStar(null)}
             >
               ★
             </span>
@@ -78,11 +84,16 @@ const FeedbackManager = () => {
       <button onClick={handleCreateFeedback} className="submit-button">
         <span className="submit-icon">🍔</span> Submit Feedback
       </button>
-
-      {/* Move the Edit Feedback button below the Submit Feedback button */}
+      <br></br>
       <button onClick={handleNavigateToEditFeedback} className="submit-button edit-feedback-button">
         Edit Feedback
       </button>
+
+      {isFeedbackSubmitted && (
+        <div className="thank-you-overlay">
+          <p className="thank-you-message">Thank you for your feedback!</p>
+        </div>
+      )}
     </div>
   );
 };

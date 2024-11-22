@@ -1,55 +1,71 @@
 .edit-feedback-card {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 30px;
-    border: 1px solid #ffc107;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .edit-feedback-card h2 {
-    color: #b74b13;
-    text-align: center;
-  }
-  
-  .edit-feedback-card ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .edit-feedback-card li {
-    margin-bottom: 15px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-  }
-  
-  .submit-button {
-    background-color: #ff8c00;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-right: 5px;
-  }
-  
-  .delete-button {
-    background-color: #dc3545;
-  }
-  
-  .rating-stars {
-    font-size: 2rem;
-    color: #ddd;
-    cursor: pointer;
-  }
-  
-  .star {
-    margin: 0 2px;
-    color: #ccc; /* Default star color */
-  }
-  
-  .star.selected {
-    color: #ffc107; /* Selected star color */
-  }
-  
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 30px;
+  border: 1px solid #ffc107;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-feedback-card h2 {
+  color: #b74b13;
+  text-align: center;
+}
+
+.edit-feedback-card ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.edit-feedback-card li {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.submit-button {
+  background-color: #ff8c00;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 5px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #e07c00;
+  transform: scale(1.05);
+}
+
+.delete-button {
+  background-color: #dc3545;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+  transform: scale(1.05);
+}
+
+.rating-stars .star {
+  margin: 0 2px;
+  color: #ccc; /* Default star color */
+  transition: color 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+
+.rating-stars .star:hover {
+  color: #ffc107; /* Hover color */
+  transform: scale(1.2); /* Slightly enlarge the star */
+}
+
+.rating-stars .star.selected {
+  color: #ffc107; /* Selected star color */
+}
+
+.edit-feedback-card li div {
+  margin-bottom: 5px;
+}
