@@ -97,11 +97,23 @@ const Login = ({ onSuccess }) => {
                         </div>
                     </form>
                 </div>
-                <div className={styles['right-panel']}> {/* Right panel */}
-                    <h1>Welcome Back!</h1>
-                    <h2>Login to Continue</h2>
-                    <div className={styles['logo']}>Logo</div>
-                </div>
+                <div className={styles['right-panel']}>
+                       
+                        <img 
+                            src="/assets/bgregister.png" 
+                            alt="Background" 
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                objectFit: 'cover',
+                                zIndex: -1
+                            }} 
+                        />
+                    </div>
+
             </div>
         </div>
     );

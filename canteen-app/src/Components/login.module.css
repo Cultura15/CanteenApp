@@ -79,17 +79,15 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
+  position: relative; /* Make it relative to allow positioning the image */
+  overflow: hidden; /* Prevent overflow of the image */
 }
 
-.right-panel h1 {
-  font-size: 24px;
-}
-
-.right-panel h2 {
-  font-size: 26px;
-  font-weight: bold;
-  margin-top: 10px;
-  text-align: center;
+.right-panel h1, 
+.right-panel h2, 
+.right-panel .logo {
+    position: relative; /* Ensure these elements appear above the background image */
+    z-index: 1; /* Higher z-index to place on top of the background */
 }
 
 .logo {

@@ -115,9 +115,19 @@ const Register = ({ onSuccess, onSwitch }) => {
 
             <div className="background-container">
 
-                <h1>Welcome to Our Platform</h1>
-
-                <p>Join us and explore amazing features!</p>
+            <img 
+                    src="/assets/bgregister1.png" 
+                    alt="Background" 
+                    style={{
+                        position: 'absolute', 
+                        top: 0, 
+                        left: 0, 
+                        width: '100%', 
+                        height: '100%', 
+                        objectFit: 'cover', 
+                        zIndex: -1
+                    }} 
+                />
 
             </div>
 

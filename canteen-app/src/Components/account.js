@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Layout from './layout';
+import './account.css';
+
+
 
 const Account = () => {
     const [userInfo, setUserInfo] = useState({
@@ -215,27 +218,19 @@ const Account = () => {
             handleDropdownOptionClick={handleDropdownOptionClick}
         >
             <div style={styles.mainContent}>
+                {/* Add the Account Settings header here */}
+                <h2 style={{ marginTop: '150px' }}>Account Settings</h2>
+
+    
                 <div style={styles.profileInfo}>
-                    <img
-                        src={profilePic || '/path/to/profile-pic.jpg'}
-                        alt="User Profile"
-                        style={styles.profilePic}
-                    />
+                  
                     <div>
                         <h2>{`${userInfo.firstName} ${userInfo.lastName}`}</h2>
                         <p><strong>Email:</strong> {userInfo.email}</p>
                     </div>
                 </div>
                 <form style={styles.form} onSubmit={handleSubmit}>
-                    <label style={styles.formLabel}>
-                        Upload Profile Picture:
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                            style={styles.formInput}
-                        />
-                    </label>
+                   
                     <label style={styles.formLabel}>
                         First Name:
                         <input
@@ -317,6 +312,8 @@ const Account = () => {
             </div>
         </Layout>
     );
+    
+    
 };
 
 export default Account;

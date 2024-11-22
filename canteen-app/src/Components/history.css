@@ -1,44 +1,103 @@
-/* history.css */
+/* General styles */
 .history-container {
     padding: 20px;
-    font-family: Arial, sans-serif;
     max-width: 1200px;
     margin: 0 auto;
+    background: #f9f9f9;
+    border-radius: 15px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    margin-top: 200px;
 }
 
-h2 {
+.history-header {
+    background: linear-gradient(90deg, #6a11cb, #2575fc);
+    padding: 15px 20px;
+    border-radius: 10px;
     text-align: center;
+    color: #fff;
     margin-bottom: 20px;
+}
+
+.history-header h2 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 .order-list {
     overflow-x: auto;
 }
 
+.no-orders {
+    text-align: center;
+    color: #888;
+    font-size: 18px;
+    padding: 20px;
+}
+
+/* Table styles */
 .order-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.order-table th, .order-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
+.order-table thead {
+    background: #2575fc;
+    color: #fff;
 }
 
-.order-table th {
-    background-color: #f4f4f4;
-}
-
-.order-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-.order-table tr:hover {
-    background-color: #f1f1f1;
-}
-
-.order-table td {
+.order-table thead tr th {
+    padding: 12px 10px;
     font-size: 14px;
+    text-align: left;
+}
+
+.order-table tbody tr {
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.order-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+.order-table tbody tr:hover {
+    background: #f0f8ff;
+    transition: background 0.3s;
+}
+
+.order-table tbody tr td {
+    padding: 12px 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .order-table thead {
+        display: none;
+    }
+
+    .order-table tbody tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        border: 1px solid #f1f1f1;
+        border-radius: 10px;
+    }
+
+    .order-table tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    .order-table tbody tr td:last-child {
+        border-bottom: none;
+    }
 }

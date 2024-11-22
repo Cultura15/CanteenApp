@@ -9,18 +9,17 @@
 
 /* Left: Background Container */
 .background-container {
+    position: relative;
     width: 50%; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to bottom right, #3f87f5, #00c98d);
     color: white;
     padding: 20px;
     text-align: center;
-    width: 50%;
-   
 }
+
 
 .background-container h1 {
     font-size: 36px;
